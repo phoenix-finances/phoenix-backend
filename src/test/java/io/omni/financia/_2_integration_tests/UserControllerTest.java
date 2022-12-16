@@ -1,5 +1,6 @@
 package io.omni.financia._2_integration_tests;
 
+import io.omni.financia.config.WebSecurityConfig;
 import io.omni.financia.controllers.UserController;
 import io.omni.financia.domains.AppUser;
 import io.omni.financia.repository.PostRepository;
@@ -37,7 +38,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         UserController.class,
         PostServiceImpl.class,
         AppUserServiceImpl.class,
-        SecurityTestConfig.class
+        //SecurityTestConfig.class,
+        WebSecurityConfig.class
 })
 public class UserControllerTest {
 
@@ -68,7 +70,7 @@ public class UserControllerTest {
 
 
     @Test
-    @WithUserDetails("user_1")
+    //@WithUserDetails("user_1")
     public void getAllUsers_success() throws Exception{
         List<AppUser> users = new ArrayList<>(List.of(USER_1, USER_2, USER_3));
 

@@ -17,6 +17,12 @@ import java.util.Collection;
 public class SecurityTestConfig {
     // https://stackoverflow.com/questions/15203485/spring-test-security-how-to-mock-authentication
 
+    // Additional explanations (or code samples) for spring-test-security
+    // https://www.baeldung.com/spring-security-integration-tests
+
+    // How to disable security during testing
+    // https://stackoverflow.com/questions/47593537/disable-spring-security-config-class-for-webmvctest-in-spring-boot
+
     @Bean
     @Primary
     public UserDetailsService userDetailsService() {
