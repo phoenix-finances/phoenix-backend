@@ -1,0 +1,11 @@
+GET http://localhost:8080/users
+Accept: application/json
+
+### Send POST request with json body
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "name": "Abu Sufian",
+  "email": "sufian@email.com"
+}
