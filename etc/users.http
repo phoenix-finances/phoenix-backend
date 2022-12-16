@@ -9,3 +9,18 @@ Content-Type: application/json
   "name": "Abu Sufian",
   "email": "sufian@email.com"
 }
+
+
+### Create User Post
+POST http://localhost:8080/users/101/posts
+Content-Type: application/json
+
+{
+  "title": "My Title",
+  "content": "a quick brown fox jumps over the lazy dog"
+}
+
+
+### Get User Posts
+GET http://localhost:8080/posts?userId=101
+Accept: application/json

@@ -1,13 +1,23 @@
 package io.omni.financia.config;
 
 import org.springframework.context.annotation.Configuration;
-
-import javax.sql.DataSource;
-import java.util.Properties;
-//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
-public class AppConfig {
+@EnableWebSecurity
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+
+    @Override
+    public void configure(HttpSecurity httpSecurity) throws Exception{
+        httpSecurity.authorizeHttpRequests()
+                .antMatchers("/users")
+                .permitAll()
+                .anyRequest()
+                .authenticated();
+    }
 
     /*public DataSource dataSource(){
         OracleDataSource dataSource = null;

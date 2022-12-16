@@ -1,19 +1,25 @@
-package io.omni.financia;
+package io.omni.financia._2_integration_tests;
 
 import io.omni.financia.controllers.UserController;
 import io.omni.financia.domains.AppUser;
+import io.omni.financia.repository.PostRepository;
 import io.omni.financia.repository.UserRepository;
 import io.omni.financia.services.impl.AppUserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.omni.financia.services.impl.PostServiceImpl;
+import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +32,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 //@WebMvcTest(UserController.class)
 // https://stackabuse.com/guide-to-unit-testing-spring-boot-rest-apis/
 @WebMvcTest
-
 // https://stackoverflow.com/questions/64540972/webmvctest-is-not-excluding-and-loading-beans-marked-as-repository
-@ContextConfiguration(classes = {UserController.class, AppUserServiceImpl.class})
+@ContextConfiguration(classes = {
+        UserController.class,
+        PostServiceImpl.class,
+        AppUserServiceImpl.class,
+        SecurityTestConfig.class
+})
 public class UserControllerTest {
 
     // https://stackabuse.com/guide-to-unit-testing-spring-boot-rest-apis/
@@ -36,15 +46,29 @@ public class UserControllerTest {
     @Autowired MockMvc mockMvc;
     @Autowired ObjectMapper mapper;
 
+    @Autowired
+    private WebApplicationContext context;
+
     //@Autowired AppUserService appUserService;
 
     @MockBean UserRepository userRepository;
+    @MockBean PostRepository postRepository;
 
     AppUser USER_1 = AppUser.builder().name("Abu Sufian").email("sufian@mail.com").build();
     AppUser USER_2 = AppUser.builder().name("Abu Sufian Milon").email("sufian@mail.com").build();
     AppUser USER_3 = AppUser.builder().name("Esme Azom").email("sufian@mail.com").build();
 
+    /*@Before
+    public void setup() {
+        mockMvc = MockMvcBuilders
+                .webAppContextSetup(context)
+                .apply(springSecurity())
+                .build();
+    }*/
+
+
     @Test
+    @WithUserDetails("user_1")
     public void getAllUsers_success() throws Exception{
         List<AppUser> users = new ArrayList<>(List.of(USER_1, USER_2, USER_3));
 

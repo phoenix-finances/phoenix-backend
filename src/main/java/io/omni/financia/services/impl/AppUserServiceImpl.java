@@ -14,6 +14,12 @@ public class AppUserServiceImpl implements AppUserService {
     private @Resource UserRepository userRepository;
 
     @Override
+    public AppUser getUser(Long userId) {
+        // TODO throw service exception or not found exception
+        return userRepository.getAppUserById(userId).orElse(null);
+    }
+
+    @Override
     public List<AppUser> getAllUsers() {
         return userRepository.findAll();
     }
