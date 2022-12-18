@@ -20,58 +20,58 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>2.7.0</version>
+            <version>2.7.0</version><!--$NO-MVN-MAN-VER$-->
         </dependency>
         <!--suppress VulnerableLibrariesLocal -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.7.0</version>
+            <version>2.7.0</version><!--$NO-MVN-MAN-VER$-->
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-            <version>2.7.0</version>
+            <version>2.7.0</version><!--$NO-MVN-MAN-VER$-->
         </dependency>
 
         <!-- START:: ORACLE JDBC PACKAGES -->
         <dependency>
             <groupId>com.oracle.database.jdbc</groupId>
             <artifactId>ojdbc11</artifactId>
-            <version>21.8.0.0</version>
+            <version>21.8.0.0</version><!--$NO-MVN-MAN-VER$-->
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.oracle.database.jdbc</groupId>
             <artifactId>ucp</artifactId>
-            <version>21.3.0.0</version>
+            <version>21.3.0.0</version><!--$NO-MVN-MAN-VER$-->
         </dependency>
         <dependency>
             <groupId>com.oracle.database.ha</groupId>
             <artifactId>ons</artifactId>
-            <version>21.3.0.0</version>
+            <version>21.3.0.0</version><!--$NO-MVN-MAN-VER$-->
         </dependency>
         <dependency>
             <groupId>com.oracle.database.security</groupId>
             <artifactId>oraclepki</artifactId>
-            <version>21.3.0.0</version>
+            <version>21.3.0.0</version><!--$NO-MVN-MAN-VER$-->
         </dependency>
         <dependency>
             <groupId>com.oracle.database.security</groupId>
             <artifactId>osdt_core</artifactId>
-            <version>21.3.0.0</version>
+            <version>21.3.0.0</version><!--$NO-MVN-MAN-VER$-->
         </dependency>
         <dependency>
             <groupId>com.oracle.database.security</groupId>
             <artifactId>osdt_cert</artifactId>
-            <version>21.3.0.0</version>
+            <version>21.3.0.0</version><!--$NO-MVN-MAN-VER$-->
         </dependency>
         <!-- END:: ORACLE JDBC PACKAGES -->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
+            <version>1.18.24</version><!--$NO-MVN-MAN-VER$-->
             <optional>true</optional>
         </dependency>
 
@@ -79,13 +79,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>2.7.0</version>
+            <version>2.7.0</version><!--$NO-MVN-MAN-VER$-->
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
-            <version>4.2.2.RELEASE</version>
+            <version>4.2.2.RELEASE</version><!--$NO-MVN-MAN-VER$-->
             <scope>test</scope>
         </dependency>
 
@@ -97,14 +97,14 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>4.8.0</version>
+            <version>4.8.0</version><!--$NO-MVN-MAN-VER$-->
             <scope>test</scope>
         </dependency>
         <!--suppress VulnerableLibrariesLocal -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>2.1.214</version>
+            <version>2.1.214</version><!--$NO-MVN-MAN-VER$-->
             <scope>test</scope>
         </dependency>
         <!-- END: TEST DEPENDENCIES -->
@@ -115,7 +115,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.7.0</version>
+                <version>2.7.0</version><!--$NO-MVN-MAN-VER$-->
                 <configuration>
                     <excludes>
                         <exclude>
@@ -129,7 +129,7 @@
             <!--For Testing-->
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M7</version>
+                <version>3.0.0-M7</version><!--$NO-MVN-MAN-VER$-->
                 <configuration>
                     <runOrder>alphabetical</runOrder>
                 </configuration>
