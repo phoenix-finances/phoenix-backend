@@ -34,8 +34,8 @@ public class AppUser {
     private Long id;
 
     private String name;
-
     private String email;
+    private String password;
 
     // https://stackoverflow.com/questions/59777807/how-to-ignore-onetomany-relation-for-get-request
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner") // without mappedBy, hibernate created additional table d1_users_user_posts

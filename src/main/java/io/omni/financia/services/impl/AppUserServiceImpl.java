@@ -1,6 +1,7 @@
 package io.omni.financia.services.impl;
 
 import io.omni.financia.domains.AppUser;
+import io.omni.financia.domains.dto.AppUserRegistrationDto;
 import io.omni.financia.repository.UserRepository;
 import io.omni.financia.services.AppUserService;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,14 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Override
     public AppUser update(AppUser request) {
+        return null;
+    }
+
+    @Override
+    public AppUser registerUser(AppUserRegistrationDto registrationDto) {
+        AppUser request = new AppUser();
+        request.setName(registrationDto.getName());
+
         return null;
     }
 }
