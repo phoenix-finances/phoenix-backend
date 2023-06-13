@@ -16,7 +16,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.authorizeHttpRequests()
-                .antMatchers("/users")
+                .antMatchers("/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

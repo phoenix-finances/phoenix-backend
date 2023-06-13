@@ -12,4 +12,6 @@ public interface AppUserService {
     AppUser insert(AppUser request);
 
     AppUser update(AppUser request);
+
+    List<AppUser> getByBusiness(Long businessId);
 }

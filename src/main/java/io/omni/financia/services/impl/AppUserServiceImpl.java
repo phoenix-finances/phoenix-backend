@@ -1,6 +1,7 @@
 package io.omni.financia.services.impl;
 
 import io.omni.financia.domains.AppUser;
+import io.omni.financia.domains.Business;
 import io.omni.financia.repository.UserRepository;
 import io.omni.financia.services.AppUserService;
 import org.springframework.stereotype.Service;
@@ -32,5 +33,10 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public AppUser update(AppUser request) {
         return null;
+    }
+
+    @Override
+    public List<AppUser> getByBusiness(Long businessId) {
+        return userRepository.getAppUsersByBusiness(new Business(businessId));
     }
 }

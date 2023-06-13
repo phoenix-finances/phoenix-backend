@@ -22,11 +22,7 @@ public class UserController{
     @GetMapping
     public List<AppUserDto> getAll(){
         return appUserService.getAllUsers()
-                .stream().map(appUser -> AppUserDto.builder()
-                        .id(appUser.getId())
-                        .name(appUser.getName())
-                        .email(appUser.getEmail())
-                        .build())
+                .stream().map(AppUserDto::from)
                 .collect(Collectors.toList());
     }
 

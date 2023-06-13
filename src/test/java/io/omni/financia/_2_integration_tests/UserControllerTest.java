@@ -54,9 +54,15 @@ public class UserControllerTest {
     @MockBean UserRepository userRepository;
     @MockBean PostRepository postRepository;
 
-    AppUser USER_1 = AppUser.builder().name("Abu Sufian").email("sufian@mail.com").build();
-    AppUser USER_2 = AppUser.builder().name("Abu Sufian Milon").email("sufian@mail.com").build();
-    AppUser USER_3 = AppUser.builder().name("Esme Azom").email("sufian@mail.com").build();
+    AppUser USER_1 = AppUser.builder()
+            //.name("Abu Sufian")
+            .email("sufian@mail.com").build();
+    AppUser USER_2 = AppUser.builder()
+            //.name("Abu Sufian Milon")
+            .email("sufian@mail.com").build();
+    AppUser USER_3 = AppUser.builder()
+            //.name("Esme Azom")
+            .email("sufian@mail.com").build();
 
     /*@Before
     public void setup() {
