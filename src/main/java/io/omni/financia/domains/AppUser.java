@@ -30,6 +30,9 @@ public class AppUser extends StringEntity{
     private String email;
     private String password;
 
+    @ManyToOne
+    private Business business;
+
     // https://stackoverflow.com/questions/59777807/how-to-ignore-onetomany-relation-for-get-request
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner") // without mappedBy, hibernate created additional table d1_users_user_posts
     private List<Post> userPosts;
