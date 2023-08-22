@@ -48,6 +48,6 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Override
     public List<AppUser> getByBusiness(Long businessId) {
-        return userRepository.getAppUsersByBusiness(new Business(businessId));
+        return null;
     }
 }

@@ -14,8 +14,6 @@ public class AppUserDto {
     private Long id;
     private String email;
     private String name;
-    private Long number;
-    private String businessName;
 
     private List<PostDto> posts;
 
@@ -24,8 +22,6 @@ public class AppUserDto {
                 .id(user.getId())
                 .name(user.getName())
                 .email(user.getEmail())
-                .number(user.getNumber())
-                .businessName(user.getBusiness() != null? user.getBusiness().getName() : "none")
                 .build();
     }
 }
