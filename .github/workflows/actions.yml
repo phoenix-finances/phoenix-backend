@@ -1,0 +1,71 @@
+name: Phoenix Backend - Build And Deploy
+on:
+  push:
+    branches:
+      - master
+jobs:
+  Aggregated:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          cache: maven
+      - name: Build with Maven
+        run: |
+          mvn --batch-mode --no-transfer-progress package --update-snapshots package
+          echo "List of files"
+          pwd
+          ls ${{ github.workspace }}
+          cp target/app.jar app.jar
+      - name: Test Docker & SSH
+        run: |
+          docker --version
+          ssh -V
+      - name: Build Docker Image
+        with:
+          docker_password: ${ secrets.DOCKER_LOGIN_PASSWORD}
+          docker_username: ${ secrets.DOCKER_LOGIN_USERNAME}
+          REPO_NAME: ${ secrets.DOCKER_REPOSITORY_NAME }
+          REPO_ROOT: ${ secrets.DOCKER_REPOSITORY_ROOT }
+          SSH_KEY: ${ secrets.SSH_PRIVATE_KEY }
+          TARGET_MACHINE_USER: ${ secrets.TARGET_MACHINE_USER }
+          TARGET_MACHINE_IP: ${ secrets.TARGET_MACHINE_IP }
+          TARGET_MACHINE_PORT: ${ secrets.TARGET_MACHINE_PORT }
+        run: |
+          set -x
+          TAG=latest
+          echo "Logging in to ECR for docker"
+          echo $docker_password | docker login --username $docker_username --password-stdin "$REPO_ROOT/$REPO_NAME"
+          echo "Build Phoenix Backend docker image"
+          docker build -t "$REPO_NAME:$TAG" \
+            --build-arg docker_source_repository=$REPO_ROOT/amazoncorreto:17 \
+            .github/workflows/Dockerfile
+          docker tag "$REPO_NAME:$TAG" "$REPO_ROOT/$REPO_NAME:$TAG"
+          echo "Pushing the Docker image..."
+          docker push "$REPO_ROOT/$REPO_NAME:$TAG"
+          rm ~/.docker/config.json || echo "Failed to clear docker auth cache"
+          echo "Deploy"
+          eval 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+          eval "$(ssh-agent -s)"
+          mkdir -p ~/.ssh
+          echo $SSH_KEY > ~/.ssh/id_rsa
+          chmod 400 ~/.ssh/id_rsa
+          cp .github/workflows/ssh_config.txt ~/.ssh/config
+          chmod 400 ~/.ssh/config
+          ssh $TARGET_MACHINE_USER@$TARGET_MACHINE_IP -p $TARGET_MACHINE_PORT \
+            "docker login --username $docker_username --password $docker_password;
+            docker pull $REPO_ROOT/$REPO_NAME:$TAG;
+            docker run -d --name $CONTAINER -p 8088:8080 $REPO_ROOT/$REPO_NAME:$TAG"
+
+      - name: Log out of Amazon ECR
+        if: always()
+        run: docker logout ${{ steps.login-ecr.outputs.registry }}
+
