@@ -31,14 +31,14 @@ jobs:
           ssh -V
       - name: Build Docker Image
         env:
-          docker_password: ${ secrets.DOCKER_LOGIN_PASSWORD}
-          docker_username: ${ secrets.DOCKER_LOGIN_USERNAME}
-          REPO_NAME: ${ secrets.DOCKER_REPOSITORY_NAME }
-          REPO_ROOT: ${ secrets.DOCKER_REPOSITORY_ROOT }
-          SSH_KEY: ${ secrets.SSH_PRIVATE_KEY }
-          TARGET_MACHINE_USER: ${ secrets.TARGET_MACHINE_USER }
-          TARGET_MACHINE_IP: ${ secrets.TARGET_MACHINE_IP }
-          TARGET_MACHINE_PORT: ${ secrets.TARGET_MACHINE_PORT }
+          docker_password: ${{ secrets.DOCKER_LOGIN_PASSWORD }}
+          docker_username: ${{ secrets.DOCKER_LOGIN_USERNAME }}
+          REPO_NAME: ${{ secrets.DOCKER_REPOSITORY_NAME }}
+          REPO_ROOT: ${{ secrets.DOCKER_REPOSITORY_ROOT }}
+          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          TARGET_MACHINE_USER: ${{ secrets.TARGET_MACHINE_USER }}
+          TARGET_MACHINE_IP: ${{ secrets.TARGET_MACHINE_IP }}
+          TARGET_MACHINE_PORT: ${{ secrets.TARGET_MACHINE_PORT }}
         run: |
           set -x
           TAG=latest
