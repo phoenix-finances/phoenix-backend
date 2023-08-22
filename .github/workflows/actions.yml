@@ -39,6 +39,9 @@ jobs:
           TARGET_MACHINE_USER: ${{ secrets.TARGET_MACHINE_USER }}
           TARGET_MACHINE_IP: ${{ secrets.TARGET_MACHINE_IP }}
           TARGET_MACHINE_PORT: ${{ secrets.TARGET_MACHINE_PORT }}
+          PHOENIX_DB_HOST: ${{ secrets.PHOENIX_DATABASE_HOST }}
+          PHOENIX_DB_USR: ${{ secrets.PHOENIX_DATABASE_USER }}
+          PHOENIX_DB_PWD: ${{ secrets.PHOENIX_DATABASE_PASSWORD }}
         run: |
           set -x
           TAG=latest
@@ -66,7 +69,12 @@ jobs:
             "docker stop $CONTAINER || echo \"$CONTAINER is not running\" ;
             docker login --username $docker_username --password \"$docker_password\" $REPO_ROOT/$REPO_NAME;
             docker pull $REPO_ROOT/$REPO_NAME:$TAG;
-            docker run -d --name $CONTAINER -p 8088:8080 $REPO_ROOT/$REPO_NAME:$TAG"
+            docker run -d --name $CONTAINER \
+              -e PHOENIX_DB_HOST=$PHOENIX_DB_HOST \
+              -e PHOENIX_DB_USR=$PHOENIX_DB_USR \
+              -e PHOENIX_DB_PWD=$PHOENIX_DB_PWD \
+              -p 8088:8080 \
+              $REPO_ROOT/$REPO_NAME:$TAG"
 
       - name: Log out of Amazon ECR
         if: always()
