@@ -21,8 +21,6 @@ jobs:
       - name: Build with Maven
         run: |
           mvn --batch-mode --no-transfer-progress package --update-snapshots package -Dmaven.test.skip=true
-          echo "List of files"
-          pwd
           ls ${{ github.workspace }}
           cp target/app.jar app.jar
       - name: Test Docker & SSH
@@ -43,20 +41,22 @@ jobs:
           PHOENIX_DB_USR: ${{ secrets.PHOENIX_DATABASE_USER }}
           PHOENIX_DB_PWD: ${{ secrets.PHOENIX_DATABASE_PASSWORD }}
         run: |
-          set -x
           TAG=latest
-          echo "Logging in to ECR for docker"
+          echo "=========Logging in for docker access"
           docker login --username $docker_username --password $docker_password "$REPO_ROOT/$REPO_NAME"
-          echo "Build Phoenix Backend docker image"
+          
+          echo "=========Build Phoenix Backend docker image========="
           cp .github/workflows/Dockerfile .
           docker build -t "$REPO_NAME:$TAG" \
             --build-arg docker_source_repository=$REPO_ROOT \
             .
           docker tag "$REPO_NAME:$TAG" "$REPO_ROOT/$REPO_NAME:$TAG"
-          echo "Pushing the Docker image..."
+          
+          echo "==================Pushing the Docker image=========="
           docker push "$REPO_ROOT/$REPO_NAME:$TAG"
           rm ~/.docker/config.json || echo "Failed to clear docker auth cache"
-          echo "Deploy"
+          
+          echo "===========================Deploy==================="
           eval 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
           eval "$(ssh-agent -s)"
           mkdir -p ~/.ssh
