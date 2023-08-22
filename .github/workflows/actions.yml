@@ -64,7 +64,7 @@ jobs:
           CONTAINER=pdc
           ssh $TARGET_MACHINE_USER@$TARGET_MACHINE_IP -p $TARGET_MACHINE_PORT \
             "docker stop $CONTAINER || echo \"$CONTAINER is not running\" ;
-            docker login --username $docker_username --password \"$docker_password\";
+            docker login --username $docker_username --password \"$docker_password\" $REPO_ROOT/$REPO_NAME;
             docker pull $REPO_ROOT/$REPO_NAME:$TAG;
             docker run -d --name $CONTAINER -p 8088:8080 $REPO_ROOT/$REPO_NAME:$TAG"
 
