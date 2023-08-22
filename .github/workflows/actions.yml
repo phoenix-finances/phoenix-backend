@@ -47,7 +47,7 @@ jobs:
           echo "Build Phoenix Backend docker image"
           cp .github/workflows/Dockerfile .
           docker build -t "$REPO_NAME:$TAG" \
-            --build-arg docker_host=$REPO_ROOT \
+            --build-arg docker_host=$REPO_ROOT/amazoncorretto:17 \
             .
           docker tag "$REPO_NAME:$TAG" "$REPO_ROOT/$REPO_NAME:$TAG"
           echo "Pushing the Docker image..."
