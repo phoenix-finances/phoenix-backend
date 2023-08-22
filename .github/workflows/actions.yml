@@ -63,7 +63,7 @@ jobs:
           chmod 400 ~/.ssh/config
           CONTAINER=pdc
           ssh $TARGET_MACHINE_USER@$TARGET_MACHINE_IP -p $TARGET_MACHINE_PORT \
-            "docker stop $CONTAINER || echo 'Container is not running';
+            "docker stop $CONTAINER || echo \"$CONTAINER is not running\" ;
             docker login --username $docker_username --password $docker_password;
             docker pull $REPO_ROOT/$REPO_NAME:$TAG;
             docker run -d --name $CONTAINER -p 8088:8080 $REPO_ROOT/$REPO_NAME:$TAG"
