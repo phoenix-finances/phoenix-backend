@@ -45,8 +45,10 @@ jobs:
           echo "Logging in to ECR for docker"
           docker login --username $docker_username --password $docker_password "$REPO_ROOT/$REPO_NAME"
           echo "Build Phoenix Backend docker image"
+          cp .github/workflows/Dockerfile .
           docker build -t "$REPO_NAME:$TAG" \
-            --build-arg docker_source_repository=$REPO_ROOT/amazoncorreto:17 .github/workflows/Dockerfile
+            --build-arg docker_source_repository=$REPO_ROOT/amazoncorreto:17 \
+            .
           docker tag "$REPO_NAME:$TAG" "$REPO_ROOT/$REPO_NAME:$TAG"
           echo "Pushing the Docker image..."
           docker push "$REPO_ROOT/$REPO_NAME:$TAG"
