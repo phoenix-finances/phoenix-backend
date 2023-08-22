@@ -1,6 +1,6 @@
 ARG docker_source_repository
 
-FROM $docker_source_repository/amazoncorretto:17
+FROM ${docker_source_repository}/amazoncorretto:17
 LABEL authors="sufian"
 
 WORKDIR /app
