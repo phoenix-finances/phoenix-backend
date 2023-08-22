@@ -1,18 +1,44 @@
-//package io.omni.financia.config;
-//
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-//import org.springframework.aop.Advisor;
-//import org.springframework.aop.aspectj.AspectJExpressionPointcut;
-//import org.springframework.aop.interceptor.CustomizableTraceInterceptor;
-//import org.springframework.aop.support.DefaultPointcutAdvisor;
-//import org.springframework.boot.web.servlet.FilterRegistrationBean;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.web.filter.CommonsRequestLoggingFilter;
-//
-//@Configuration
-//public class AppConfig {
+package io.omni.financia.config;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.aop.Advisor;
+import org.springframework.aop.aspectj.AspectJExpressionPointcut;
+import org.springframework.aop.interceptor.CustomizableTraceInterceptor;
+import org.springframework.aop.support.DefaultPointcutAdvisor;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.filter.CommonsRequestLoggingFilter;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+
+@Configuration
+public class AppConfig {
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception {
+        return builder.getAuthenticationManager();
+    }
+
+
 //    private final Logger logger = LoggerFactory.getLogger(AppConfig.class);
 //    @Bean
 //    public CommonsRequestLoggingFilter requestLoggingFilter() {
@@ -48,4 +74,4 @@
 //        aspectJExpressionPointcut.setExpression("execution(public * io.silverbird.api..*.*(..))");
 //        return new DefaultPointcutAdvisor(aspectJExpressionPointcut, customizableTraceInterceptor());
 //    }
-//}
+}
