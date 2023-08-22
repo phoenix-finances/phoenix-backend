@@ -26,6 +26,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -103,6 +104,11 @@ public class UserController {
                 .jwtToken(token)
                 .username(userDetails.getUsername()).build();
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/me")
+    public AppUser getMyself(Principal principal){
+        return null;
     }
 
     private void doAuthenticate(String email, String password) {
