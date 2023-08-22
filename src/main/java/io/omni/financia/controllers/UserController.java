@@ -56,7 +56,11 @@ public class UserController {
     @GetMapping
     public List<AppUserDto> getAll() {
         return appUserService.getAllUsers()
-                .stream().map(AppUserDto::from)
+                .stream().map(appUser -> AppUserDto.builder()
+                        .id(appUser.getId())
+                        .name(appUser.getName())
+                        .email(appUser.getEmail())
+                        .build())
                 .collect(Collectors.toList());
     }
 
@@ -96,7 +100,6 @@ public class UserController {
 
         this.doAuthenticate(request.getEmail(), request.getPassword());
 
-
         UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
         String token = this.helper.generateToken(userDetails);
 
@@ -108,7 +111,11 @@ public class UserController {
 
     @GetMapping("/me")
     public AppUser getMyself(Principal principal){
-        return null;
+        logger.info("kkkkkkkkkkkkkkkkk"+principal.getName());
+        if(principal.getName().equals(userRepository.findAppUserByEmail(principal.getName()).getEmail())){
+            return userRepository.findAppUserByEmail(principal.getName());
+        }
+        return new AppUser();
     }
 
     private void doAuthenticate(String email, String password) {
