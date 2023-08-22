@@ -30,7 +30,7 @@ jobs:
           docker --version
           ssh -V
       - name: Build Docker Image
-        with:
+        env:
           docker_password: ${ secrets.DOCKER_LOGIN_PASSWORD}
           docker_username: ${ secrets.DOCKER_LOGIN_USERNAME}
           REPO_NAME: ${ secrets.DOCKER_REPOSITORY_NAME }
