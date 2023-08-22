@@ -1,4 +1,4 @@
-package io.omni.financia.repository;
+package io.omni.financia.domains.repository;
 
 import io.omni.financia.domains.Post;
 import org.springframework.data.jpa.repository.JpaRepository;

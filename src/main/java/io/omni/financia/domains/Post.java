@@ -1,8 +1,8 @@
 package io.omni.financia.domains;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
-import javax.persistence.*;
 
 @Entity
 @Table(name = "d1_user_posts")
