@@ -7,14 +7,15 @@ import io.omni.financia.services.LedgerService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 @Service
 public class LedgerServiceImpl implements LedgerService {
     private @Resource LedgerRepo ledgerRepo;
 
     @Override
-    public List<Ledger> getAllLedger() {
-        return ledgerRepo.findAll();
+    public List<Ledger> getAllLedger(Principal principal) {
+        return ledgerRepo.findLedgerByAppUserEmail(principal.getName());
     }
 
     @Override

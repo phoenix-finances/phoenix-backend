@@ -20,7 +20,7 @@ public class LedgerController {
     @GetMapping
     List<Ledger> getAll(Principal principal) {
         // TODO return only Ledgers owned by current user
-        return ledgerService.getAllLedger();
+        return ledgerService.getAllLedger(principal);
     }
 
     @GetMapping("/{id}")
