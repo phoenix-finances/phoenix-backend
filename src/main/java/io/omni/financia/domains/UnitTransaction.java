@@ -1,16 +1,23 @@
 package io.omni.financia.domains;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Data;
+import io.omni.financia.domains.dto.UnitTransactionDto;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
-public class UnitTransaction {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+
+public class UnitTransaction extends AbstractEntity {
+    @ManyToOne
+    private Transaction transaction;
+    @ManyToOne
+    private Ledger ledger;
+    private double debit;
+    private double credit;
+
+    public UnitTransactionDto toDto() {
+        return UnitTransactionDto.from(this);
+    }
 
 }
