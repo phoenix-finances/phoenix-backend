@@ -14,7 +14,6 @@ public interface AppUserService {
 
     AppUser update(AppUser request);
 
-    List<AppUser> getByBusiness(Long businessId);
 
     AppUser registerUser(AppUserRegistrationDto registrationDto);
 }
