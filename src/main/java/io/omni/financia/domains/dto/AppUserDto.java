@@ -15,8 +15,6 @@ public class AppUserDto {
     private String email;
     private String name;
 
-    private List<PostDto> posts;
-
     public static AppUserDto from(AppUser user){
         return AppUserDto.builder()
                 .id(user.getId())

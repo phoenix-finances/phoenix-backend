@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @AllArgsConstructor
-public class Ledger {
+public class Ledger extends AbstractEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -21,7 +21,6 @@ public class Ledger {
     private AppUser appUser;
 
     @ManyToOne
-    @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private Ledger parent;
 
     public Ledger() {

@@ -3,11 +3,9 @@ package io.omni.financia._2_integration_tests;
 import io.omni.financia.config.WebSecurityConfig;
 import io.omni.financia.controllers.UserController;
 import io.omni.financia.domains.AppUser;
-import io.omni.financia.domains.repository.PostRepository;
 import io.omni.financia.domains.repository.UserRepository;
 import io.omni.financia.services.impl.AppUserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.omni.financia.services.impl.PostServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +31,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // https://stackoverflow.com/questions/64540972/webmvctest-is-not-excluding-and-loading-beans-marked-as-repository
 @ContextConfiguration(classes = {
         UserController.class,
-        PostServiceImpl.class,
         AppUserServiceImpl.class,
         //SecurityTestConfig.class,
         WebSecurityConfig.class
@@ -52,7 +49,7 @@ public class UserControllerTest {
     //@Autowired AppUserService appUserService;
 
     @MockBean UserRepository userRepository;
-    @MockBean PostRepository postRepository;
+    //@MockBean PostRepository postRepository;
 
     AppUser USER_1 = AppUser.builder()
             //.name("Abu Sufian")
