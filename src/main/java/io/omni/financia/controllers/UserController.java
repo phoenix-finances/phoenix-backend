@@ -37,17 +37,16 @@ public class UserController {
 
     Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @Autowired
+    @Resource
     private UserDetailsService userDetailsService;
 
-    @Autowired
+    @Resource
     private AuthenticationManager manager;
 
-    @Autowired
+    @Resource
     private PasswordEncoder passwordEncoder;
 
-
-    @Autowired
+    @Resource
     private JwtHelper helper;
 
     private @Resource AppUserService appUserService;
@@ -78,22 +77,22 @@ public class UserController {
         }
     }
 
-//    @PostMapping("/{userId}/posts")
-//    public PostDto createUserPost(@PathVariable Long userId, @RequestBody PostDto request) {
-//        Post post = new Post();
-//        post.setTitle(request.getTitle());
-//        post.setContent(request.getContent());
-//
-//        AppUser user = appUserService.getUser(userId);
-//        post.setOwner(user);
-//        Post createdPost = postService.insertPost(post);
-//
-//        return PostDto.builder()
-//                .id(createdPost.getId())
-//                .title(createdPost.getTitle())
-//                .content(createdPost.getContent())
-//                .build();
-//    }
+    /*@PostMapping("/{userId}/posts")
+    public PostDto createUserPost(@PathVariable Long userId, @RequestBody PostDto request) {
+        Post post = new Post();
+        post.setTitle(request.getTitle());
+        post.setContent(request.getContent());
+
+        AppUser user = appUserService.getUser(userId);
+        post.setOwner(user);
+        Post createdPost = postService.insertPost(post);
+
+        return PostDto.builder()
+                .id(createdPost.getId())
+                .title(createdPost.getTitle())
+                .content(createdPost.getContent())
+                .build();
+    }*/
 
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request) {

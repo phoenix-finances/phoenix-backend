@@ -14,14 +14,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/ledgers")
 public class LedgerController {
-    @Autowired
-    private LedgerService ledgerService;
+    private @Resource LedgerService ledgerService;
     private @Resource UserRepository userRepository;
 
     @GetMapping
-    List<Ledger> getAll() {
+    List<Ledger> getAll(Principal principal) {
+        // TODO return only Ledgers owned by current user
         return ledgerService.getAllLedger();
     }
+
     @GetMapping("/{id}")
     Ledger getOne(@PathVariable Long id){
         return ledgerService.getUserLedger(id);
