@@ -67,7 +67,7 @@ public class UserController {
     @PostMapping
     public AppUser insert(HttpServletResponse respone, @RequestBody AppUser request) {
         //logger.info("MMMMMMMMMMMMMMMMMMMM"+request.getEmail());
-        if (request.getEmail().equals(userRepository.findAppUserByEmail((request.getEmail())).getEmail())) {
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             logger.info("Duplicate Email Not Acceptable!");
             respone.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
             return new AppUser();
@@ -112,10 +112,12 @@ public class UserController {
     @GetMapping("/me")
     public AppUser getMyself(Principal principal){
         logger.info("kkkkkkkkkkkkkkkkk"+principal.getName());
-        if(principal.getName().equals(userRepository.findAppUserByEmail(principal.getName()).getEmail())){
+        /*if(principal.getName().equals(userRepository.findAppUserByEmail(principal.getName()).getEmail())){
             return userRepository.findAppUserByEmail(principal.getName());
         }
-        return new AppUser();
+        return new AppUser();*/
+
+        return userRepository.findAppUserByEmail(principal.getName());
     }
 
     private void doAuthenticate(String email, String password) {
