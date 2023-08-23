@@ -46,8 +46,4 @@ public class AppUserServiceImpl implements AppUserService {
         return null;
     }
 
-    @Override
-    public List<AppUser> getByBusiness(Long businessId) {
-        return null;
-    }
 }

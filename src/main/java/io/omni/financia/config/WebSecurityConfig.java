@@ -36,6 +36,8 @@ public class WebSecurityConfig {
                         auth.requestMatchers("/posts")
                                 .authenticated()
                                 .requestMatchers("/users").permitAll()
+                                .requestMatchers("/ledgers").permitAll()
+                                .requestMatchers("/ledgers/**").permitAll()
                                 .requestMatchers("/users/login").permitAll()
                                 //.authenticated().requestMatchers("/customer").permitAll()
                                 .anyRequest().permitAll())
