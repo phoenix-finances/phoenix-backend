@@ -20,9 +20,8 @@ public class TransactionDto {
         Transaction transaction = new Transaction();
         transaction.setId(id);
         transaction.setDescription(description);
-        List<UnitTransactionDto> trnsDto = new ArrayList<>();
         List<UnitTransaction> trnsEnt = new ArrayList<>();
-        trnsDto = unitTransactions;
+        List<UnitTransactionDto> trnsDto = new ArrayList<>(unitTransactions);
         for (UnitTransactionDto elm : trnsDto) {
             trnsEnt.add(elm.toEntity());
         }

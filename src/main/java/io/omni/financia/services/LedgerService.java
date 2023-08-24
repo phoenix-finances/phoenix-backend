@@ -7,7 +7,7 @@ import java.security.Principal;
 import java.util.List;
 
 public interface LedgerService {
-    List<Ledger> getAllLedger(Principal principal);
+    List<LedgerDto> getAllLedger(Principal principal);
 
     Ledger getUserLedger(Long id);
 
@@ -15,5 +15,5 @@ public interface LedgerService {
 
     Ledger updateLedger(LedgerDto data);
 
-    Ledger addLedger(LedgerDto data);
+    Ledger addLedger(Ledger data);
 }
