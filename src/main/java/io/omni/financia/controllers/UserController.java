@@ -88,10 +88,6 @@ public class UserController {
     @GetMapping("/me")
     public AppUser getMyself(Principal principal){
         logger.info("kkkkkkkkkkkkkkkkk"+principal.getName());
-        /*if(principal.getName().equals(userRepository.findAppUserByEmail(principal.getName()).getEmail())){
-            return userRepository.findAppUserByEmail(principal.getName());
-        }
-        return new AppUser();*/
 
         return userRepository.findAppUserByEmail(principal.getName());
     }

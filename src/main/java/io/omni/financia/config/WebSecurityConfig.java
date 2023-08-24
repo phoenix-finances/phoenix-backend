@@ -2,13 +2,13 @@ package io.omni.financia.config;
 
 import io.omni.financia.security.JwtAuthenticationEntryPoint;
 import io.omni.financia.security.JwtAuthenticationFilter;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,22 +19,22 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    @Autowired
+    @Resource
     private UserDetailsService userDetailService;
-    @Autowired
+    @Resource
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
+    @Resource
     private JwtAuthenticationEntryPoint point;
-    @Autowired
+    @Resource
     private JwtAuthenticationFilter filter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.csrf(csrf -> csrf.disable()).cors(corse -> corse.disable()).authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/posts")
-                                .authenticated()
+        http.csrf(AbstractHttpConfigurer::disable).cors(AbstractHttpConfigurer::disable).authorizeHttpRequests(auth ->
+                        auth.requestMatchers("/posts").authenticated()
+                                .requestMatchers("/").permitAll()
                                 .requestMatchers("/users").permitAll()
                                 .requestMatchers("/ledgers").permitAll()
                                 .requestMatchers("/ledgers/**").permitAll()
@@ -48,22 +48,6 @@ public class WebSecurityConfig {
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-
-    /*public DataSource dataSource(){
-        OracleDataSource dataSource = null;
-        try {
-            dataSource = new OracleDataSource();
-            Properties props = new Properties();
-            String oracle_net_wallet_location =
-                    System.getProperty("oracle.net.wallet_location");
-            props.put("oracle.net.wallet_location", "(source=(method=file)(method_data=(directory="+oracle_net_wallet_location+")))");
-            dataSource.setConnectionProperties(props);
-            dataSource.setURL(url);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        return dataSource;
-    }*/
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {

@@ -68,7 +68,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.24</version><!--$NO-MVN-MAN-VER$-->
+            <version>1.18.28</version><!--$NO-MVN-MAN-VER$-->
             <optional>true</optional>
         </dependency>
 
@@ -76,7 +76,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>2.7.0</version><!--$NO-MVN-MAN-VER$-->
+            <version>3.1.2</version><!--$NO-MVN-MAN-VER$-->
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -94,20 +94,20 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>4.8.0</version><!--$NO-MVN-MAN-VER$-->
+            <version>5.5.0</version><!--$NO-MVN-MAN-VER$-->
             <scope>test</scope>
         </dependency>
         <!--suppress VulnerableLibrariesLocal -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>2.1.214</version><!--$NO-MVN-MAN-VER$-->
+            <version>2.2.220</version><!--$NO-MVN-MAN-VER$-->
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
-            <version>10.1.11</version>
+            <version>10.1.12</version>
         </dependency>
 
         <!-- END: TEST DEPENDENCIES -->
