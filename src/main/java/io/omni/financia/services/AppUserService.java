@@ -1,7 +1,7 @@
 package io.omni.financia.services;
 
 import io.omni.financia.domains.AppUser;
-import io.omni.financia.domains.dto.AppUserRegistrationDto;
+import io.omni.financia.dto.AppUserRegistrationDto;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package io.omni.financia.domains;
+package io.omni.financia.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class JwtResponse {
+public class LoginResponse {
     private String jwtToken;
     private String username;
 }

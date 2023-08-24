@@ -1,11 +1,9 @@
 package io.omni.financia.controllers;
 
 import io.omni.financia.domains.Ledger;
-import io.omni.financia.domains.repository.LedgerRepo;
-import io.omni.financia.domains.repository.UserRepository;
+import io.omni.financia.repository.UserRepository;
 import io.omni.financia.services.LedgerService;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;

@@ -1,4 +1,4 @@
-package io.omni.financia.domains.repository;
+package io.omni.financia.repository;
 
 import io.omni.financia.domains.UnitTransaction;
 import org.springframework.data.jpa.repository.JpaRepository;

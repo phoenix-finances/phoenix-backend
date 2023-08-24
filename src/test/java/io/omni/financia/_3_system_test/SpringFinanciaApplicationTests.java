@@ -2,7 +2,7 @@ package io.omni.financia._3_system_test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.omni.financia.SpringFinanciaApplication;
-import io.omni.financia.domains.dto.AppUserDto;
+import io.omni.financia.dto.AppUserDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

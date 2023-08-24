@@ -1,12 +1,10 @@
-package io.omni.financia.domains.dto;
+package io.omni.financia.dto;
 
 import io.omni.financia.domains.AppUser;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @Builder @NoArgsConstructor @AllArgsConstructor

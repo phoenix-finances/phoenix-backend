@@ -1,6 +1,6 @@
 package io.omni.financia.domains;
 
-import io.omni.financia.domains.dto.LedgerDto;
+import io.omni.financia.dto.LedgerDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,10 +8,8 @@ import lombok.*;
 @Getter
 @Setter
 @AllArgsConstructor
+@Table(name = "ledgers")
 public class Ledger extends AbstractEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
     private String name;
     private double balance;
     private int transactionCount = 0;

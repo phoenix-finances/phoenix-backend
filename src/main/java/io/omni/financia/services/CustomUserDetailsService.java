@@ -1,7 +1,7 @@
 package io.omni.financia.services;
 
 import io.omni.financia.domains.AppUser;
-import io.omni.financia.domains.repository.UserRepository;
+import io.omni.financia.repository.UserRepository;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

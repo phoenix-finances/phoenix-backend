@@ -1,9 +1,8 @@
-package io.omni.financia.domains.dto;
+package io.omni.financia.dto;
 
 import io.omni.financia.domains.Ledger;
 import io.omni.financia.domains.Transaction;
 import io.omni.financia.domains.UnitTransaction;
-import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Data

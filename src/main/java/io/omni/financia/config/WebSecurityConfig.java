@@ -39,6 +39,8 @@ public class WebSecurityConfig {
                                 .requestMatchers("/ledgers").permitAll()
                                 .requestMatchers("/ledgers/**").permitAll()
                                 .requestMatchers("/users/login").permitAll()
+                                .requestMatchers("/transactions").permitAll()
+                                .requestMatchers("/transactions/**").permitAll()
                                 //.authenticated().requestMatchers("/customer").permitAll()
                                 .anyRequest().permitAll())
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(point))

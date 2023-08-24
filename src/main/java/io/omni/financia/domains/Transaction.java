@@ -1,14 +1,11 @@
 package io.omni.financia.domains;
 
-import io.omni.financia.domains.dto.TransactionDto;
-import io.omni.financia.domains.dto.UnitTransactionDto;
+import io.omni.financia.dto.TransactionDto;
+import io.omni.financia.dto.UnitTransactionDto;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity

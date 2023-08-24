@@ -3,7 +3,7 @@ package io.omni.financia._2_integration_tests;
 import io.omni.financia.config.WebSecurityConfig;
 import io.omni.financia.controllers.UserController;
 import io.omni.financia.domains.AppUser;
-import io.omni.financia.domains.repository.UserRepository;
+import io.omni.financia.repository.UserRepository;
 import io.omni.financia.services.impl.AppUserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;

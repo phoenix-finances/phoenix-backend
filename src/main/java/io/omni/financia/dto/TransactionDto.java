@@ -1,11 +1,10 @@
-package io.omni.financia.domains.dto;
+package io.omni.financia.dto;
 
 import io.omni.financia.domains.Ledger;
 import io.omni.financia.domains.Transaction;
 import io.omni.financia.domains.UnitTransaction;
 import lombok.Data;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +27,7 @@ public class TransactionDto {
             trnsEnt.add(elm.toEntity());
         }
         transaction.setUnitTransaction(trnsEnt);
+        transaction.setLedger(new Ledger(ledger.getId()));
         return transaction;
     }
 }

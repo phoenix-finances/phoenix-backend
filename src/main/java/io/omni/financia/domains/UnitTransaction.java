@@ -1,6 +1,6 @@
 package io.omni.financia.domains;
 
-import io.omni.financia.domains.dto.UnitTransactionDto;
+import io.omni.financia.dto.UnitTransactionDto;
 import jakarta.persistence.*;
 import lombok.*;
 
