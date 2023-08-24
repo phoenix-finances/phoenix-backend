@@ -1,10 +1,9 @@
 package io.omni.financia.services.impl;
 
 import io.omni.financia.domains.AppUser;
-import io.omni.financia.domains.dto.AppUserRegistrationDto;
-import io.omni.financia.domains.repository.UserRepository;
+import io.omni.financia.dto.AppUserRegistrationDto;
+import io.omni.financia.repository.UserRepository;
 import io.omni.financia.services.AppUserService;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.Resource;

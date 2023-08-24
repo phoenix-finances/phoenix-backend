@@ -1,8 +1,8 @@
 package io.omni.financia.services.impl;
 
 import io.omni.financia.domains.Ledger;
-import io.omni.financia.domains.dto.LedgerDto;
-import io.omni.financia.domains.repository.LedgerRepo;
+import io.omni.financia.dto.LedgerDto;
+import io.omni.financia.repository.LedgerRepo;
 import io.omni.financia.services.LedgerService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;

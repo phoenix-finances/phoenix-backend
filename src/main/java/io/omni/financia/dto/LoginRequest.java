@@ -1,9 +1,9 @@
-package io.omni.financia.domains;
+package io.omni.financia.dto;
 
 import lombok.Data;
 
 @Data
-public class JwtRequest {
+public class LoginRequest {
     private String email;
     private String password;
 }

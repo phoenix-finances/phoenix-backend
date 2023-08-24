@@ -1,4 +1,4 @@
-package io.omni.financia.domains.dto;
+package io.omni.financia.dto;
 
 import io.omni.financia.domains.AppUser;
 import io.omni.financia.domains.Ledger;

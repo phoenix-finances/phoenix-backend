@@ -1,7 +1,7 @@
 package io.omni.financia.services;
 
 import io.omni.financia.domains.Ledger;
-import io.omni.financia.domains.dto.LedgerDto;
+import io.omni.financia.dto.LedgerDto;
 
 import java.security.Principal;
 import java.util.List;

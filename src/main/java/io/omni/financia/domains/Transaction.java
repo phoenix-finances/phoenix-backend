@@ -1,26 +1,33 @@
 package io.omni.financia.domains;
 
-import io.omni.financia.domains.dto.TransactionDto;
+import io.omni.financia.dto.TransactionDto;
+import io.omni.financia.dto.UnitTransactionDto;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
-public class Transaction {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+
+public class Transaction extends AbstractEntity {
     private String description;
     @OneToMany
     private List<UnitTransaction> unitTransaction;
+    @ManyToOne
+    private Ledger ledger;
+
+    public Transaction(Long id) {
+        super(id);
+    }
+
 /*    @Transient
-    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss");*/
-//    private String dateTime = LocalDateTime.now().format(myFormatObj);
+    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss");
+   private String dateTime = LocalDateTime.now().format(myFormatObj);*/
 
     public TransactionDto toDto() {
         return Transaction.from(this);
@@ -31,7 +38,14 @@ public class Transaction {
         dto.setId(entity.getId());
         dto.setDescription(entity.getDescription());
 //        dto.setDateTime(entity.getDateTime());
-        dto.setUnitTransaction(entity.getUnitTransaction());
+        List<UnitTransactionDto> trnsDto = new ArrayList<>();
+        List<UnitTransaction> trnsEnt = new ArrayList<>();
+        trnsEnt = entity.getUnitTransaction();
+        for (UnitTransaction elm : trnsEnt) {
+            trnsDto.add(elm.toDto());
+        }
+        dto.setUnitTransactions(trnsDto);
+        dto.setLedger(entity.getLedger().toDto());
         return dto;
     }
 }

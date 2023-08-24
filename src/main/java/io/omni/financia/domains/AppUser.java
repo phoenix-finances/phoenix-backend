@@ -9,14 +9,18 @@ import lombok.EqualsAndHashCode;
 
 @Entity
 @Table(name = "app_users")
-@Data @EqualsAndHashCode(callSuper = true)
-@Builder @AllArgsConstructor
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Builder
+@AllArgsConstructor
 public class AppUser extends AbstractEntity {
     private String name;
     private String email;
     private String password;
 
-    public AppUser() {}
+    public AppUser() {
+    }
+
     public AppUser(Long id) {
         super(id);
     }

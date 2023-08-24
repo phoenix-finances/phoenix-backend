@@ -1,10 +1,10 @@
 package io.omni.financia.controllers;
 
 import io.omni.financia.domains.AppUser;
-import io.omni.financia.domains.JwtRequest;
-import io.omni.financia.domains.JwtResponse;
-import io.omni.financia.domains.dto.AppUserDto;
-import io.omni.financia.domains.repository.UserRepository;
+import io.omni.financia.dto.LoginRequest;
+import io.omni.financia.dto.LoginResponse;
+import io.omni.financia.dto.AppUserDto;
+import io.omni.financia.repository.UserRepository;
 import io.omni.financia.security.JwtHelper;
 import io.omni.financia.services.AppUserService;
 import jakarta.annotation.Resource;
@@ -72,14 +72,14 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request) {
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
 
         this.doAuthenticate(request.getEmail(), request.getPassword());
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
         String token = this.helper.generateToken(userDetails);
 
-        JwtResponse response = JwtResponse.builder()
+        LoginResponse response = LoginResponse.builder()
                 .jwtToken(token)
                 .username(userDetails.getUsername()).build();
         return new ResponseEntity<>(response, HttpStatus.OK);
