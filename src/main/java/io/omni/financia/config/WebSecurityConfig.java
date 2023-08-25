@@ -5,6 +5,7 @@ import io.omni.financia.security.JwtAuthenticationFilter;
 import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -31,22 +32,24 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-        http.csrf(AbstractHttpConfigurer::disable).cors(AbstractHttpConfigurer::disable).authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/posts").authenticated()
-                                .requestMatchers("/").permitAll()
-                                .requestMatchers("/users").permitAll()
-                                .requestMatchers("/ledgers").permitAll()
-                                .requestMatchers("/ledgers/**").permitAll()
-                                .requestMatchers("/users/login").permitAll()
-                                .requestMatchers("/transactions").permitAll()
-                                .requestMatchers("/transactions/**").permitAll()
-                                //.authenticated().requestMatchers("/customer").permitAll()
-                                .anyRequest().permitAll())
+        return http
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth -> auth
+                        //.requestMatchers("/posts").authenticated()
+                        .requestMatchers("/").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                        //.requestMatchers("/ledgers").permitAll()
+                        //.requestMatchers("/ledgers/**").permitAll()
+                        .requestMatchers("/users/login").permitAll()
+                        //.requestMatchers("/transactions").permitAll()
+                        //.requestMatchers("/transactions/**").permitAll()
+                        //.authenticated().requestMatchers("/customer").permitAll()
+                        .anyRequest().authenticated())
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(point))
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
-        return http.build();
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
+                .build();
     }
 
     @Bean
