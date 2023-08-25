@@ -1,6 +1,7 @@
 package io.omni.financia.controllers;
 
 import io.omni.financia.domains.Ledger;
+import io.omni.financia.dto.LedgerDto;
 import io.omni.financia.repository.UserRepository;
 import io.omni.financia.services.LedgerService;
 import jakarta.annotation.Resource;
@@ -16,19 +17,19 @@ public class LedgerController {
     private @Resource UserRepository userRepository;
 
     @GetMapping
-    List<Ledger> getAll(Principal principal) {
+    List<LedgerDto> getAll(Principal principal) {
         // TODO return only Ledgers owned by current user
         return ledgerService.getAllLedger(principal);
     }
 
     @GetMapping("/{id}")
-    Ledger getOne(@PathVariable Long id){
-        return ledgerService.getUserLedger(id);
+    LedgerDto getOne(@PathVariable Long id){
+        return ledgerService.getUserLedger(id).toDto();
     }
 
     @PostMapping
-    Ledger add(@RequestBody Ledger data, Principal principal){
+    LedgerDto add(@RequestBody Ledger data, Principal principal){
         data.setAppUser(userRepository.findAppUserByEmail(principal.getName()));
-        return ledgerService.addLedger(data.toDto());
+        return ledgerService.addLedger(data).toDto();
     }
 }

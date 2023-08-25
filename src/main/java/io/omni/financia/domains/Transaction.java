@@ -13,6 +13,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "transactions")
 
 public class Transaction extends AbstractEntity {
     private String description;

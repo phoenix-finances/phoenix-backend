@@ -7,6 +7,7 @@ import lombok.*;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
+@Table(name = "unit_transactions")
 
 public class UnitTransaction extends AbstractEntity {
     @ManyToOne

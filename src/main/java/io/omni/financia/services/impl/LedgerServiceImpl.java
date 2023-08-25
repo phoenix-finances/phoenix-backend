@@ -8,14 +8,21 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class LedgerServiceImpl implements LedgerService {
     private @Resource LedgerRepo ledgerRepo;
 
     @Override
-    public List<Ledger> getAllLedger(Principal principal) {
-        return ledgerRepo.findLedgerByAppUserEmail(principal.getName());
+    public List<LedgerDto> getAllLedger(Principal principal) {
+        List<Ledger>entity=new ArrayList<>();
+        List<LedgerDto>dto=new ArrayList<>();
+        entity=ledgerRepo.findLedgerByAppUserEmail(principal.getName());
+        for(Ledger elm: entity){
+            dto.add(elm.toDto());
+        }
+        return dto;
     }
 
     @Override
@@ -34,7 +41,7 @@ public class LedgerServiceImpl implements LedgerService {
     }
 
     @Override
-    public Ledger addLedger(LedgerDto data) {
-        return ledgerRepo.save(data.toEntity());
+    public Ledger addLedger(Ledger data) {
+        return ledgerRepo.save(data);
     }
 }
