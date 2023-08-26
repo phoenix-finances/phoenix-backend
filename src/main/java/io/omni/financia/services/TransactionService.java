@@ -1,16 +1,15 @@
 package io.omni.financia.services;
 
-import io.omni.financia.domains.Transaction;
-import io.omni.financia.dto.TransactionDto;
+import io.omni.financia.domains.TransactionGroup;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public interface TransactionService {
-    List<Transaction> getAll(Long id);
+    List<TransactionGroup> getAll(Long id);
 
-    Transaction addTransaction(TransactionDto transactionDto);
+    TransactionGroup addTransaction(TransactionGroup transactionDto);
 
     void deleteTransaction(Long id);
 }

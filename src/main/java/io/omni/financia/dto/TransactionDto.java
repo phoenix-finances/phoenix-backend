@@ -1,32 +1,37 @@
 package io.omni.financia.dto;
 
 import io.omni.financia.domains.Ledger;
+import io.omni.financia.domains.TransactionGroup;
 import io.omni.financia.domains.Transaction;
-import io.omni.financia.domains.UnitTransaction;
 import lombok.Data;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 public class TransactionDto {
-    private Long id;
-    private String description;
-    private List<UnitTransactionDto> unitTransactions;
+    private Long transactionGroupId;
     private LedgerDto ledger;
-//    private String dateTime;
+    private double debit;
+    private double credit;
 
     public Transaction toEntity() {
-        Transaction transaction = new Transaction();
-        transaction.setId(id);
-        transaction.setDescription(description);
-        List<UnitTransaction> trnsEnt = new ArrayList<>();
-        List<UnitTransactionDto> trnsDto = new ArrayList<>(unitTransactions);
-        for (UnitTransactionDto elm : trnsDto) {
-            trnsEnt.add(elm.toEntity());
-        }
-        transaction.setUnitTransaction(trnsEnt);
-        transaction.setLedger(new Ledger(ledger.getId()));
-        return transaction;
+        Transaction entity = new Transaction();
+        /*if (transactionGroup != null)
+            entity.setTransactionGroup(new TransactionGroup(transactionGroup.getId()));*/
+
+        entity.setCredit(credit);
+        entity.setDebit(debit);
+        entity.setLedger(new Ledger(ledger.getId()));
+        return entity;
+    }
+
+    public static TransactionDto from(Transaction entity) {
+        TransactionDto dto = new TransactionDto();
+        /*if (entity.getTransactionGroup() != null)
+            dto.setTransactionGroup(entity.getTransactionGroup().toDto());*/
+        dto.setTransactionGroupId(entity.getTransactionGroup().getId());
+
+        dto.setDebit(entity.getDebit());
+        dto.setLedger(entity.getLedger().toDto());
+        dto.setCredit(entity.getCredit());
+        return dto;
     }
 }

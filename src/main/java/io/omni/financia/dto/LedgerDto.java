@@ -14,7 +14,6 @@ public class LedgerDto {
     private String name;
     private double balance;
     private int transactionCount = 0;
-    private AppUser appUser;
 
     private Ledger parent;
 
@@ -24,7 +23,6 @@ public class LedgerDto {
         ledger.setName(name);
         ledger.setTransactionCount(transactionCount);
         ledger.setBalance(balance);
-        ledger.setAppUser(new AppUser(appUser.getId()));
         return ledger;
     }
 
