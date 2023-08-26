@@ -11,8 +11,8 @@ import lombok.*;
 @Table(name = "ledgers")
 public class Ledger extends AbstractEntity {
     private String name;
-    private double balance;
-    private int transactionCount = 0;
+    private Double balance;
+    private Integer transactionCount = 0;
 
     @ManyToOne
     private Ledger parent;

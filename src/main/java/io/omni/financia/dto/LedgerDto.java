@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 public class LedgerDto {
     private Long id;
     private String name;
-    private double balance;
-    private int transactionCount = 0;
+    private Double balance;
+    private Integer transactionCount = 0;
 
     private Ledger parent;
 

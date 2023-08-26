@@ -38,6 +38,11 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
+    public AppUser findUserByEmail(String email) {
+        return userRepository.findAppUserByEmail(email);
+    }
+
+    @Override
     public AppUser registerUser(AppUserRegistrationDto registrationDto) {
         AppUser request = new AppUser();
         request.setName(registrationDto.getName());

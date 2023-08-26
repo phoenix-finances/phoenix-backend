@@ -13,7 +13,7 @@ public interface AppUserService {
     AppUser insert(AppUser request);
 
     AppUser update(AppUser request);
-
+    AppUser findUserByEmail(String email);
 
     AppUser registerUser(AppUserRegistrationDto registrationDto);
 }

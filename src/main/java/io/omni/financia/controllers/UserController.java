@@ -75,10 +75,14 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
+        AppUser user = appUserService.findUserByEmail(request.getEmail());
+        if (user == null)
+            return ResponseEntity.badRequest().build();
 
-        this.doAuthenticate(request.getEmail(), request.getPassword());
+        this.doAuthenticate(user.getId().toString(), request.getPassword());
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
+        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getId().toString());
+        
         String token = this.helper.generateToken(userDetails);
 
         LoginResponse response = LoginResponse.builder()

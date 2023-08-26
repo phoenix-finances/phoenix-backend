@@ -14,8 +14,8 @@ public class Transaction extends AbstractEntity {
     private TransactionGroup transactionGroup;
     @ManyToOne
     private Ledger ledger;
-    private double debit;
-    private double credit;
+    private Double debit;
+    private Double credit;
 
     public TransactionDto toDto() {
         return TransactionDto.from(this);
