@@ -18,7 +18,7 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public AppUser getUser(Long userId) {
         // TODO throw service exception or not found exception
-        return userRepository.getAppUserById(userId).orElse(null);
+        return userRepository.findById(userId).orElse(null);
     }
 
     @Override

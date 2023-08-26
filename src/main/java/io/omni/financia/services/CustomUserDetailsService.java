@@ -21,7 +21,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         logger.info("Requested UserDetails for username: {}", username);
-        AppUser user = userRepository.findByEmail(username).orElseThrow(()->new RuntimeException("USER NOT FOUND"));
+        AppUser user = userRepository.findById(Long.parseLong(username)).orElseThrow(()->new RuntimeException("USER NOT FOUND"));
         return new User(String.valueOf(user.getId()), user.getPassword(), Collections.singletonList(new SimpleGrantedAuthority("USER")));
     }
 }

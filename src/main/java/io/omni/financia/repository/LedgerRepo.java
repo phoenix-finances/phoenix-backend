@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface LedgerRepo extends JpaRepository<Ledger,Long> {
-    List<Ledger>findLedgerByAppUserEmail(String email);
+    //List<Ledger>findLedgerByAppUserEmail(String email);
 }

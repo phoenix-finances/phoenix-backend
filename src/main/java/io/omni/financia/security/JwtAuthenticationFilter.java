@@ -2,6 +2,7 @@ package io.omni.financia.security;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
+import jakarta.annotation.Resource;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,11 +25,11 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private Logger logger = (Logger) LoggerFactory.getLogger(OncePerRequestFilter.class);
-    @Autowired
+    @Resource
     private JwtHelper jwtHelper;
 
 
-    @Autowired
+    @Resource
     private UserDetailsService userDetailsService;
 
     @Override

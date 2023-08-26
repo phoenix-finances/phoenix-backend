@@ -1,18 +1,21 @@
 package io.omni.financia.domains;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @Table(name="ledger_permissions")
-public class LedgerPermission {
+public class LedgerPermission extends AbstractEntity{
+
+    @ManyToOne
     private AppUser user;
+
+    @ManyToOne
     private Ledger ledger;
-    
+
     @Enumerated(EnumType.STRING)
     private Permission permission;
 
