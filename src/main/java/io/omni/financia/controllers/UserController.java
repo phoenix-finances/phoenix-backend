@@ -25,6 +25,8 @@ import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.lang.Integer.parseInt;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -89,7 +91,7 @@ public class UserController {
     public AppUser getMyself(Principal principal){
         logger.info("kkkkkkkkkkkkkkkkk"+principal.getName());
 
-        return userRepository.findAppUserByEmail(principal.getName());
+        return userRepository.findById(Long.valueOf((principal.getName()))).orElse(null);
     }
 
     private void doAuthenticate(String email, String password) {

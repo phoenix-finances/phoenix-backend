@@ -15,9 +15,6 @@ public class Ledger extends AbstractEntity {
     private int transactionCount = 0;
 
     @ManyToOne
-    private AppUser appUser;
-
-    @ManyToOne
     private Ledger parent;
 
     public Ledger() {
@@ -38,7 +35,6 @@ public class Ledger extends AbstractEntity {
         dto.setName(entity.getName());
         dto.setBalance(entity.getBalance());
         dto.setTransactionCount(entity.getTransactionCount());
-        dto.setAppUser(entity.getAppUser());
         return dto;
     }
 

@@ -1,11 +1,8 @@
 package io.omni.financia.services.impl;
 
 import io.omni.financia.domains.Transaction;
-import io.omni.financia.domains.UnitTransaction;
 import io.omni.financia.dto.TransactionDto;
-import io.omni.financia.dto.UnitTransactionDto;
-import io.omni.financia.repository.UnitTransactionRepo;
-import io.omni.financia.services.TransactionService;
+import io.omni.financia.repository.TransactionRepository;
 import io.omni.financia.services.UnitTransactionService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -15,32 +12,32 @@ import java.util.List;
 
 @Service
 public class UnitTransactionServiceImpl implements UnitTransactionService {
-    private @Resource UnitTransactionRepo unitTransactionRepo;
+    private @Resource TransactionRepository unitTransactionRepo;
 
     @Override
-    public List<UnitTransactionDto> getUnitTransactionOfTransaction(Long transactionId) {
-        List<UnitTransaction> entity = new ArrayList<>();
-        List<UnitTransactionDto> dto = new ArrayList<>();
-        entity = unitTransactionRepo.findUnitTransactionByTransactionId(transactionId);
-        for (UnitTransaction elm : entity) {
+    public List<TransactionDto> getUnitTransactionOfTransaction(Long transactionId) {
+        List<Transaction> entity = new ArrayList<>();
+        List<TransactionDto> dto = new ArrayList<>();
+        entity = unitTransactionRepo.findTransactionsByTransactionGroupId(transactionId);
+        for (Transaction elm : entity) {
             dto.add(elm.toDto());
         }
         return dto;
     }
 
     @Override
-    public List<UnitTransactionDto> getUnitTransactionOfLedger(Long ledgerId) {
-        List<UnitTransaction> entity = new ArrayList<>();
-        List<UnitTransactionDto> dto = new ArrayList<>();
-        entity = unitTransactionRepo.findUnitTransactionByTransactionId(ledgerId);
-        for (UnitTransaction elm : entity) {
+    public List<TransactionDto> getUnitTransactionOfLedger(Long ledgerId) {
+        List<Transaction> entity = new ArrayList<>();
+        List<TransactionDto> dto = new ArrayList<>();
+        entity = unitTransactionRepo.findTransactionsByTransactionGroupId(ledgerId);
+        for (Transaction elm : entity) {
             dto.add(elm.toDto());
         }
         return dto;
     }
 
     @Override
-    public UnitTransaction createUnitTransaction(UnitTransaction data) {
+    public Transaction createUnitTransaction(Transaction data) {
         return unitTransactionRepo.save(data);
     }
 
