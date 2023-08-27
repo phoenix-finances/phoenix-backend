@@ -20,6 +20,9 @@ public class TransactionGroup extends AbstractEntity {
     @OneToMany
     private List<Transaction> transactions;
 
+    @ManyToOne
+    private TransactionTimeline transactionTimeline;
+
 
 
     public TransactionGroup(Long id) {
