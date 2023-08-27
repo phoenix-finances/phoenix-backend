@@ -7,7 +7,7 @@ The project is built on:
 * Spring Data
 * MySQL 8.0
 
-You can open the project directly with Intellij Community. 
+You can run the project directly with Intellij Community. 
 
 To run the project, you need your MySQL credentials declared on environment variables. You can either IntelliJ's run configuration or add these variable in your system. The variable names and values are following:
 * PHOENIX_DB_HOST=<your_db_host>

@@ -1,4 +1,4 @@
-package io.omni.financia.domains.dto;
+package io.omni.financia.dto;
 
 import lombok.Data;
 

@@ -1,41 +1,55 @@
 package io.omni.financia.config;
 
+import io.omni.financia.security.JwtAuthenticationEntryPoint;
+import io.omni.financia.security.JwtAuthenticationFilter;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@SuppressWarnings("deprecation")
+import javax.annotation.Resource;
+
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig {
 
+    @Resource
+    private UserDetailsService userDetailService;
+    @Resource
+    private PasswordEncoder passwordEncoder;
 
-    @Override
-    public void configure(HttpSecurity httpSecurity) throws Exception{
-        httpSecurity.authorizeHttpRequests()
-                .antMatchers("/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and().csrf().disable();
+    @Resource
+    private JwtAuthenticationEntryPoint point;
+    @Resource
+    private JwtAuthenticationFilter filter;
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth -> auth
+                        //.requestMatchers("/posts").authenticated()
+                        .antMatchers("/").permitAll()
+                        .antMatchers(HttpMethod.POST, "/users").permitAll()
+                        //.requestMatchers("/ledgers").permitAll()
+                        //.requestMatchers("/ledgers/**").permitAll()
+                        .antMatchers("/users/login").permitAll()
+                        //.requestMatchers("/transactions").permitAll()
+                        //.requestMatchers("/transactions/**").permitAll()
+                        //.authenticated().requestMatchers("/customer").permitAll()
+                        .anyRequest().authenticated())
+                .exceptionHandling(ex -> ex.authenticationEntryPoint(point))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
+                .build();
     }
 
-    /*public DataSource dataSource(){
-        OracleDataSource dataSource = null;
-        try {
-            dataSource = new OracleDataSource();
-            Properties props = new Properties();
-            String oracle_net_wallet_location =
-                    System.getProperty("oracle.net.wallet_location");
-            props.put("oracle.net.wallet_location", "(source=(method=file)(method_data=(directory="+oracle_net_wallet_location+")))");
-            dataSource.setConnectionProperties(props);
-            dataSource.setURL(url);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        return dataSource;
-    }*/
 }
