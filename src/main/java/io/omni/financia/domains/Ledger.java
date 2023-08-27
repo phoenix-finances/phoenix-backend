@@ -35,6 +35,7 @@ public class Ledger extends AbstractEntity {
         dto.setName(entity.getName());
         dto.setBalance(entity.getBalance());
         dto.setTransactionCount(entity.getTransactionCount());
+        dto.setParent(entity.getParent());
         return dto;
     }
 

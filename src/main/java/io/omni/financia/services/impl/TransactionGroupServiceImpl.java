@@ -4,7 +4,7 @@ import io.omni.financia.domains.Transaction;
 import io.omni.financia.domains.TransactionGroup;
 import io.omni.financia.repository.TransactionGroupRepository;
 import io.omni.financia.repository.TransactionRepository;
-import io.omni.financia.services.TransactionService;
+import io.omni.financia.services.TransactionGroupService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class TransactionServiceImpl implements TransactionService {
+public class TransactionGroupServiceImpl implements TransactionGroupService {
     private @Resource TransactionGroupRepository transactionGroupRepository;
     private @Resource TransactionRepository transactionRepository;
 

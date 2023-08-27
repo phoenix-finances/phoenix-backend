@@ -7,8 +7,9 @@ import lombok.Data;
 
 @Data
 public class TransactionDto {
+    private Long id;
     private Long transactionGroupId;
-    private LedgerDto ledger;
+    private Long ledgerId;
     private double debit;
     private double credit;
 
@@ -16,10 +17,10 @@ public class TransactionDto {
         Transaction entity = new Transaction();
         /*if (transactionGroup != null)
             entity.setTransactionGroup(new TransactionGroup(transactionGroup.getId()));*/
-
+        entity.setId(id);
         entity.setCredit(credit);
         entity.setDebit(debit);
-        entity.setLedger(new Ledger(ledger.getId()));
+        entity.setLedger(new Ledger(ledgerId));
         return entity;
     }
 
@@ -28,10 +29,10 @@ public class TransactionDto {
         /*if (entity.getTransactionGroup() != null)
             dto.setTransactionGroup(entity.getTransactionGroup().toDto());*/
         dto.setTransactionGroupId(entity.getTransactionGroup().getId());
-
         dto.setDebit(entity.getDebit());
-        dto.setLedger(entity.getLedger().toDto());
+        dto.setLedgerId(entity.getLedger().getId());
         dto.setCredit(entity.getCredit());
+        dto.setId(entity.getId());
         return dto;
     }
 }

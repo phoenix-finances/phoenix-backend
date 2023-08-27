@@ -2,7 +2,8 @@ package io.omni.financia.controllers;
 
 import io.omni.financia.domains.Transaction;
 import io.omni.financia.dto.TransactionDto;
-import io.omni.financia.services.UnitTransactionService;
+import io.omni.financia.repository.TransactionRepository;
+import io.omni.financia.services.TransactionService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,25 +12,32 @@ import java.util.List;
 @RestController
 @RequestMapping("/transactions")
 public class TransactionController {
-    private @Resource UnitTransactionService unitTransactionService;
+    private @Resource TransactionService transactionService;
 
     @GetMapping("/transaction/{id}")
-    List<TransactionDto> getOfTransaction(@PathVariable Long id) {
-        return unitTransactionService.getUnitTransactionOfTransaction(id);
+    List<TransactionDto> getOfTransactionGroup(@PathVariable Long id) {
+        return transactionService.getUnitTransactionOfTransaction(id);
     }
 
     @GetMapping("/ledger/{id}")
     List<TransactionDto> getOfLedger(@PathVariable Long id) {
-        return unitTransactionService.getUnitTransactionOfLedger(id);
+        return transactionService.getUnitTransactionOfLedger(id);
     }
 
     @PostMapping
     TransactionDto createUnitTransaction(@RequestBody Transaction data){
-        return unitTransactionService.createUnitTransaction(data).toDto();
+        return transactionService.createUnitTransaction(data).toDto();
     }
 
     @DeleteMapping("/unitTransactionId")
     void delete(@PathVariable Long unitTransactionId) {
-        unitTransactionService.deleteUnitTransaction(unitTransactionId);
+        transactionService.deleteUnitTransaction(unitTransactionId);
+    }
+
+    private @Resource TransactionRepository transactionRepository;
+    //TEST
+    @GetMapping
+    List<Transaction>transactionDtos(){
+        return transactionRepository.findAll();
     }
 }

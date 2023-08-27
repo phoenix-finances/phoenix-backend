@@ -52,11 +52,11 @@ public class WebSecurityConfig {
                 .build();
     }
 
-    @Bean
+/*    @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailService);
         provider.setPasswordEncoder(passwordEncoder);
         return provider;
-    }
+    }*/
 }

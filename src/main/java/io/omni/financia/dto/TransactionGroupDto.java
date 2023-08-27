@@ -3,6 +3,7 @@ package io.omni.financia.dto;
 import io.omni.financia.domains.Ledger;
 import io.omni.financia.domains.Transaction;
 import io.omni.financia.domains.TransactionGroup;
+import io.omni.financia.domains.TransactionTimeline;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -10,18 +11,18 @@ import java.util.List;
 
 @Data
 public class TransactionGroupDto {
-//    Logger logger= LoggerFactory.
     private Long id;
     private String description;
     private List<TransactionDto> transactions;
+    private TransactionTimelineDto transactionTimeline;
 //    private String dateTime;
 
     public TransactionGroup toEntity() {
         TransactionGroup transaction = new TransactionGroup();
         transaction.setId(id);
         transaction.setDescription(description);
-
-        if (transactions != null){
+        transaction.setTransactionTimeline(new TransactionTimeline(transactionTimeline.getId()));
+        if (transactions != null) {
             List<Transaction> transactionEntities = new ArrayList<>();
             for (TransactionDto transactionDto : transactions) {
                 transactionEntities.add(transactionDto.toEntity());
@@ -36,8 +37,8 @@ public class TransactionGroupDto {
         TransactionGroupDto dto = new TransactionGroupDto();
         dto.setId(entity.getId());
         dto.setDescription(entity.getDescription());
-
-        if (entity.getTransactions() != null){
+        dto.setTransactionTimeline(entity.getTransactionTimeline().toDto());
+        if (entity.getTransactions() != null) {
             List<TransactionDto> transactionDtos = new ArrayList<>();
 
             for (Transaction transaction : entity.getTransactions()) {

@@ -1,7 +1,10 @@
 package io.omni.financia.services.impl;
 
 import io.omni.financia.domains.AppUser;
+import io.omni.financia.domains.TransactionTimeline;
 import io.omni.financia.dto.AppUserRegistrationDto;
+import io.omni.financia.dto.TransactionTimelineDto;
+import io.omni.financia.repository.TransactionTimeLineRepository;
 import io.omni.financia.repository.UserRepository;
 import io.omni.financia.services.AppUserService;
 import org.springframework.stereotype.Service;
@@ -14,6 +17,7 @@ import java.util.List;
 public class AppUserServiceImpl implements AppUserService {
 
     private @Resource UserRepository userRepository;
+    private @Resource TransactionTimeLineRepository transactionTimeLineRepository;
 
     @Override
     public AppUser getUser(Long userId) {
@@ -28,8 +32,11 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Override
     public AppUser insert(AppUser request) {
-
-        return userRepository.save(request);
+        TransactionTimeline transactionTimeline = new TransactionTimeline();
+        AppUser savedUser=userRepository.save(request);
+        transactionTimeline.setOwner(savedUser);
+        transactionTimeLineRepository.save(transactionTimeline);
+        return savedUser;
     }
 
     @Override
