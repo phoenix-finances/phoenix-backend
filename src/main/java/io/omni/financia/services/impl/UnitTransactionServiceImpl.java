@@ -3,7 +3,7 @@ package io.omni.financia.services.impl;
 import io.omni.financia.domains.Transaction;
 import io.omni.financia.dto.TransactionDto;
 import io.omni.financia.repository.TransactionRepository;
-import io.omni.financia.services.UnitTransactionService;
+import io.omni.financia.services.TransactionService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UnitTransactionServiceImpl implements UnitTransactionService {
+public class UnitTransactionServiceImpl implements TransactionService {
     private @Resource TransactionRepository unitTransactionRepo;
 
     @Override

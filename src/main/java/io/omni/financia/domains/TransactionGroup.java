@@ -20,6 +20,8 @@ public class TransactionGroup extends AbstractEntity {
     @OneToMany
     private List<Transaction> transactions;
 
+
+
     public TransactionGroup(Long id) {
         super(id);
     }

@@ -49,11 +49,11 @@ public class WebSecurityConfig {
         return http.build();
     }
 
-    @Bean
+/*    @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailService);
         provider.setPasswordEncoder(passwordEncoder);
         return provider;
-    }
+    }*/
 }

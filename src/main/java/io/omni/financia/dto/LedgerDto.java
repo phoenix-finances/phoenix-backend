@@ -23,6 +23,7 @@ public class LedgerDto {
         ledger.setName(name);
         ledger.setTransactionCount(transactionCount);
         ledger.setBalance(balance);
+        ledger.setParent(new Ledger(id));
         return ledger;
     }
 
