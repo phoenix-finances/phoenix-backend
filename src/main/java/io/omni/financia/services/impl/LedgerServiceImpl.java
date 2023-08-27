@@ -7,12 +7,12 @@ import io.omni.financia.dto.LedgerDto;
 import io.omni.financia.repository.LedgerPermissionRepository;
 import io.omni.financia.repository.LedgerRepository;
 import io.omni.financia.services.LedgerService;
-import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class LedgerServiceImpl implements LedgerService {
     private @Resource LedgerRepository ledgerRepository;
@@ -20,21 +20,12 @@ public class LedgerServiceImpl implements LedgerService {
 
     @Override
     public List<LedgerDto> getAllLedger(AppUser user) {
-        //List<Ledger>entity=new ArrayList<>();
+        List<LedgerDto> ledgerDtos = new ArrayList<>();
+        List<LedgerPermission> permissions = ledgerPermissionRepository.findLedgerPermissionsByUserId(user.getId());
 
-        List<LedgerDto>ledgerDtos=new ArrayList<>();
-        //entity=ledgerRepo.findLedgerByAppUserEmail(principal.getName());
-
-        // Long userId = Long.parseLong(principal.getName());
-        //List<LedgerPermission> permissions = ledgerPermissions.findLedgerPermissionsByUserId(...);
-        List<LedgerPermission> permissions = new ArrayList<>();
-        for (LedgerPermission permission : permissions){
+        for (LedgerPermission permission : permissions) {
             ledgerDtos.add(permission.getLedger().toDto());
         }
-
-        /*for(Ledger elm: entity){
-            ledgerDtos.add(elm.toDto());
-        }*/
         return ledgerDtos;
     }
 
