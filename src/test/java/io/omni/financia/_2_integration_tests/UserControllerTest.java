@@ -5,6 +5,8 @@ import io.omni.financia.config.AppConfig;
 import io.omni.financia.config.WebSecurityConfig;
 import io.omni.financia.controllers.UserController;
 import io.omni.financia.domains.AppUser;
+import io.omni.financia.domains.TransactionTimeline;
+import io.omni.financia.repository.TransactionTimelineRepository;
 import io.omni.financia.repository.UserRepository;
 import io.omni.financia.security.JwtAuthenticationEntryPoint;
 import io.omni.financia.security.JwtAuthenticationFilter;
@@ -29,7 +31,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -63,6 +68,7 @@ public class UserControllerTest {
     //@Autowired AppUserService appUserService;
 
     @MockBean UserRepository userRepository;
+    @MockBean TransactionTimelineRepository transactionTimeLineRepository;
     //@MockBean PostRepository postRepository;
 
     AppUser USER_1 = AppUser.builder()
@@ -94,12 +100,19 @@ public class UserControllerTest {
 
     @Test
     public void userRegister_success() throws Exception{
-        Mockito.when(userRepository.save((AppUser) any(AppUser.class)))
+        Mockito.when(userRepository.save(any()))
                         .thenAnswer(invocation ->{
                             AppUser user = invocation.getArgument(0);
                             user.setId(1L);
                             return user;
                         });
+
+        Mockito.when(transactionTimeLineRepository.save(any()))
+                .thenAnswer(invocation ->{
+                    TransactionTimeline timeline = invocation.getArgument(0);
+                    timeline.setId(1L);
+                    return timeline;
+                });
 
         mockMvc.perform(jsonRequest(MockMvcRequestBuilders.post("/users"), USER_1))
                 .andExpect(jsonPath("$", notNullValue()))

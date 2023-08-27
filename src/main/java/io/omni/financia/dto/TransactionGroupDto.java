@@ -1,6 +1,5 @@
 package io.omni.financia.dto;
 
-import io.omni.financia.domains.Ledger;
 import io.omni.financia.domains.Transaction;
 import io.omni.financia.domains.TransactionGroup;
 import io.omni.financia.domains.TransactionTimeline;
@@ -14,14 +13,17 @@ public class TransactionGroupDto {
     private Long id;
     private String description;
     private List<TransactionDto> transactions;
-    private TransactionTimelineDto transactionTimeline;
-//    private String dateTime;
+    private Long transactionTimelineId;
+    //private String dateTime;
 
     public TransactionGroup toEntity() {
         TransactionGroup transaction = new TransactionGroup();
         transaction.setId(id);
         transaction.setDescription(description);
-        transaction.setTransactionTimeline(new TransactionTimeline(transactionTimeline.getId()));
+
+        if (transactionTimelineId != null)
+            transaction.setTransactionTimeline(new TransactionTimeline(transactionTimelineId));
+
         if (transactions != null) {
             List<Transaction> transactionEntities = new ArrayList<>();
             for (TransactionDto transactionDto : transactions) {
@@ -37,7 +39,7 @@ public class TransactionGroupDto {
         TransactionGroupDto dto = new TransactionGroupDto();
         dto.setId(entity.getId());
         dto.setDescription(entity.getDescription());
-        dto.setTransactionTimeline(entity.getTransactionTimeline().toDto());
+        dto.setTransactionTimelineId(entity.getTransactionTimeline().getId());
         if (entity.getTransactions() != null) {
             List<TransactionDto> transactionDtos = new ArrayList<>();
 

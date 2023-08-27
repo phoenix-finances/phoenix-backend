@@ -1,7 +1,7 @@
 package io.omni.financia.domains;
 
 import io.omni.financia.dto.TransactionDto;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 @Data

@@ -1,7 +1,7 @@
 package io.omni.financia.domains;
 
 import io.omni.financia.dto.LedgerDto;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)

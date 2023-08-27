@@ -1,6 +1,6 @@
 package io.omni.financia.domains;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 
 @MappedSuperclass

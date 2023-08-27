@@ -4,7 +4,7 @@ import io.omni.financia.domains.Transaction;
 import io.omni.financia.dto.TransactionDto;
 import io.omni.financia.repository.TransactionRepository;
 import io.omni.financia.services.TransactionService;
-import jakarta.annotation.Resource;
+import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

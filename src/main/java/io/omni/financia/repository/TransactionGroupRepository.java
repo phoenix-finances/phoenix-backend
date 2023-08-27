@@ -8,4 +8,5 @@ import java.util.List;
 
 @Repository
 public interface TransactionGroupRepository extends JpaRepository<TransactionGroup, Long> {
+    List<TransactionGroup> getTransactionGroupsByTransactionTimelineId(Long id);
 }

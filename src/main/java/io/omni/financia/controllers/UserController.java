@@ -1,14 +1,12 @@
 package io.omni.financia.controllers;
 
 import io.omni.financia.domains.AppUser;
+import io.omni.financia.dto.AppUserDto;
 import io.omni.financia.dto.LoginRequest;
 import io.omni.financia.dto.LoginResponse;
-import io.omni.financia.dto.AppUserDto;
 import io.omni.financia.repository.UserRepository;
 import io.omni.financia.security.JwtHelper;
 import io.omni.financia.services.AppUserService;
-import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -21,31 +19,22 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.lang.Integer.parseInt;
-
 @RestController
 @RequestMapping("/users")
 public class UserController {
+    private final Logger logger = LoggerFactory.getLogger(UserController.class);
+
+    private @Resource UserDetailsService userDetailsService;
     private @Resource UserRepository userRepository;
-
-    Logger logger = LoggerFactory.getLogger(UserController.class);
-
-    @Resource
-    private UserDetailsService userDetailsService;
-
-    @Resource
-    private AuthenticationManager manager;
-
-    @Resource
-    private PasswordEncoder passwordEncoder;
-
-    @Resource
-    private JwtHelper helper;
-
+    private @Resource AuthenticationManager manager;
+    private @Resource PasswordEncoder passwordEncoder;
+    private @Resource JwtHelper helper;
     private @Resource AppUserService appUserService;
 
     @GetMapping
@@ -61,13 +50,11 @@ public class UserController {
 
     @PostMapping
     public AppUser insert(HttpServletResponse respone, @RequestBody AppUser request) {
-        //logger.info("MMMMMMMMMMMMMMMMMMMM"+request.getEmail());
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             logger.info("Duplicate Email Not Acceptable!");
             respone.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
             return new AppUser();
         } else {
-            //logger.info("NNNNNNNNNNNNNNNN"+userRepository.findAppUserByEmail((request.getEmail())).getEmail());
             request.setPassword((passwordEncoder.encode(request.getPassword())));
             return appUserService.insert(request);
         }
@@ -79,11 +66,10 @@ public class UserController {
         if (user == null)
             return ResponseEntity.badRequest().build();
 
-        this.doAuthenticate(user.getId().toString(), request.getPassword());
+        doAuthenticate(user.getId().toString(), request.getPassword());
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(user.getId().toString());
-        
-        String token = this.helper.generateToken(userDetails);
+        String token = helper.generateToken(userDetails);
 
         LoginResponse response = LoginResponse.builder()
                 .jwtToken(token)
@@ -92,19 +78,15 @@ public class UserController {
     }
 
     @GetMapping("/me")
-    public AppUser getMyself(Principal principal){
-        logger.info("kkkkkkkkkkkkkkkkk"+principal.getName());
-
+    public AppUser getMyself(Principal principal) {
+        logger.info("kkkkkkkkkkkkkkkkk" + principal.getName());
         return userRepository.findById(Long.valueOf((principal.getName()))).orElse(null);
     }
 
     private void doAuthenticate(String email, String password) {
-
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, password);
         try {
             manager.authenticate(authentication);
-
-
         } catch (BadCredentialsException e) {
             throw new BadCredentialsException(" Invalid Username or Password  !!");
         }

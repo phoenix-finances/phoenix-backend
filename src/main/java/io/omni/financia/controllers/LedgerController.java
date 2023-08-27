@@ -6,7 +6,7 @@ import io.omni.financia.dto.LedgerDto;
 import io.omni.financia.repository.UserRepository;
 import io.omni.financia.services.AppUserService;
 import io.omni.financia.services.LedgerService;
-import jakarta.annotation.Resource;
+import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
