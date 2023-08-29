@@ -8,7 +8,8 @@ import java.util.List;
 
 @Service
 public interface TransactionService {
-    List<TransactionDto>getUnitTransactionOfTransaction(Long transactionId);
+    List<TransactionDto>getTransaction();
+    List<TransactionDto>getTransactionOfTransactionGroup(Long transactionGroupId);
     List<TransactionDto>getUnitTransactionOfLedger(Long ledgerId);
     Transaction createUnitTransaction(Transaction data);
     void deleteUnitTransaction(Long id);

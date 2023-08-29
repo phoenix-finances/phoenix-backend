@@ -14,9 +14,9 @@ import java.util.List;
 public class TransactionController {
     private @Resource TransactionService transactionService;
 
-    @GetMapping("/transaction/{id}")
+    @GetMapping("/transaction-group/{id}")
     List<TransactionDto> getOfTransactionGroup(@PathVariable Long id) {
-        return transactionService.getUnitTransactionOfTransaction(id);
+        return transactionService.getTransactionOfTransactionGroup(id);
     }
 
     @GetMapping("/ledger/{id}")
@@ -37,7 +37,7 @@ public class TransactionController {
     private @Resource TransactionRepository transactionRepository;
     //TEST
     @GetMapping
-    List<Transaction>transactionDtos(){
-        return transactionRepository.findAll();
+    List<TransactionDto>transactionDtos(){
+        return transactionService.getTransaction();
     }
 }
