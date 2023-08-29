@@ -38,6 +38,9 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         //.requestMatchers("/posts").authenticated()
                         .antMatchers("/").permitAll()
+                        .antMatchers("/signup").permitAll()
+                        .antMatchers("/signin").permitAll()
+                        .antMatchers("/login").permitAll()
                         .antMatchers(HttpMethod.POST, "/users").permitAll()
                         //.requestMatchers("/ledgers").permitAll()
                         //.requestMatchers("/ledgers/**").permitAll()
