@@ -1,12 +1,376 @@
-
 <!DOCTYPE html>
-<html>
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <meta charset="UTF-8"/>
-    <title>Hello World App</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <script th:src="@{/js/index.js}"></script>
+    <script
+            src="https://kit.fontawesome.com/fa8c3d741e.js"
+            crossorigin="anonymous"
+    ></script>
+    <title>Phoenix Finance</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+* {
+  scroll-behavior: smooth;
+}
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+.theme-bg {
+  background-color: #bc4899;
+}
+
+.theme-text {
+  color: #bc4899;
+}
+.theme-btn:hover {
+  background-color: #bc4899;
+}
+.theme-border {
+  border-color: #bc4899;
+}
+
+/* Deep */
+.theme-bg-2:hover {
+  background-color: #7e184e;
+}
+
+    </style>
 </head>
+
 <body>
+<nav
+        class="rounded-b sticky top-0 z-10 flex justify-between px-10 py-4 theme-bg text-white"
+>
+    <div class="logo">
+        <img src="https://moneylover.me/img/logo.svg" alt="logo" />
+    </div>
+    <div class="">
+        <ul class="list-none flex gap-4 items-center">
+            <li class="hover:text-red-100 hover:scale-105 duration-100">
+                <a href="#">About</a>
+            </li>
+            <li class="hover:text-red-100 hover:scale-105 duration-100">
+                <a href="#">Reviews</a>
+            </li>
+            <li class="hover:text-red-100 hover:scale-105 duration-100">
+                <a href="#">Career</a>
+            </li>
+            <li class="hover:text-red-100 hover:scale-105 duration-100">
+                <a href="#">Contact</a>
+            </li>
+            <li
+                    class="border rounded-full h-8 w-8 flex items-center justify-center hover:text-red-100 hover:scale-105 duration-100"
+            >
+                <a class="" href="#"><i class="fa-solid fa-user"></i></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HEADER START -->
+<header class="px-10 md:h-screen pb-20 bg-gray-100">
+    <h1
+            class="md:pt-36 pt-28 md:pb-20 pb-16 px-3 text-center header md:text-6xl text-4xl font-bold"
+    >
+        <span class="block theme-text">Easy Way</span> to manage
+        <span class="theme-text">personal finances</span>
+    </h1>
+    <div class="flex justify-center gap-20">
+        <button
+                class="theme-border border-4 md:px-10 md:py-4 px-6 py-2 rounded hover:text-white theme-btn duration-100"
+        >
+            Try on browser
+        </button>
+        <button
+                class="md:px-10 md:py-4 px-6 py-2 rounded text-white theme-btn theme-bg theme-bg-2 duration-100"
+        >
+            Download Android
+        </button>
+    </div>
+</header>
+
+<!-- Simple Summery Section -->
+<div
+        class="text-center duration100 my-20 px-10 grid md:grid-cols-4 grid-cols-2 gap-5 gutter-5"
+>
+    <div
+            class="duration-200 hover:shadow-2xl flex flex-col justify-center items-center px-5 py-10 rounded shadow-xl card shadow bg-fuchsia-200"
+    >
+        <i class="text-5xl theme-text fa-solid fa-shield-halved"></i>
+        <p class="mt-5 font-bold text-xl">100% Secured data</p>
+    </div>
+    <div
+            class="duration-200 hover:shadow-2xl flex flex-col justify-center items-center px-5 py-10 rounded shadow-xl card shadow bg-fuchsia-200"
+    >
+        <i class="text-5xl theme-text fa-solid fa-people-group"></i>
+        <p class="mt-5 font-bold text-xl">1 Million+ users</p>
+    </div>
+    <div
+            class="duration-200 hover:shadow-2xl flex flex-col justify-center items-center px-5 py-10 rounded shadow-xl card shadow bg-fuchsia-200"
+    >
+        <i class="text-5xl theme-text fa-solid fa-ranking-star"></i>
+        <p class="mt-5 font-bold text-xl">1M+ users</p>
+    </div>
+    <div
+            class="duration-200 hover:shadow-2xl flex flex-col justify-center items-center px-5 py-10 rounded shadow-xl card shadow bg-fuchsia-200"
+    >
+        <i class="text-5xl theme-text fa-solid fa-medal"></i>
+        <p class="mt-5 font-bold text-xl">People's Choice</p>
+    </div>
+</div>
+
+<!-- Simple Money Tracker -->
+<div
+        class="md:h-screen flex flex-wrap items-center justify-center px-10 md:gap-10"
+>
+    <img
+            class="order-2 md:order-1 block md:w-2/5 shadow-2xl hover:scale-105 duration-200"
+            src="https://moneylover.me/img/details/Transaction@4x.png"
+            alt="money tracker"
+    />
+    <article class="md:order-2 order-1 md:w-2/5 w-full">
+        <h2 class="md:text-5xl text-4xl pb-2 font-bold">
+            Simple money tracker
+        </h2>
+        <p>
+            It takes seconds to record daily transactions. Put them into clear and
+            visualized categories such as Expense: Food, Shopping or Income:
+            Salary, Gift.
+        </p>
+    </article>
+</div>
+
+<!-- Painless Budgeting -->
+<div
+        class="pt-10 md:pt-0 md:h-screen flex flex-wrap items-center justify-center px-10 md:gap-10"
+>
+    <img
+            class="order-2 block md:w-2/5 shadow-2xl hover:scale-105 duration-200"
+            src="https://moneylover.me/img/details/budget@4x.png"
+            alt="money tracker"
+    />
+    <article class="order-1 md:w-2/5 w-full">
+        <h2 class="md:text-5xl text-4xl pb-2 font-bold">Painless budgeting</h2>
+        <p>
+            It takes seconds to record daily transactions. Put them into clear and
+            visualized categories such as Expense: Food, Shopping or Income:
+            Salary, Gift.
+        </p>
+    </article>
+</div>
+
+<!-- Features section -->
+<section class="pb-20 mt-10 md:mt-0 bg-gray-100 px-10 text-center">
+    <h2 class="md:text-5xl text-4xl font-bold py-20">
+        Features our users love
+    </h2>
+    <div class="grid md:grid-cols-3 grid-cols-1 gap-10">
+        <div
+                class="bg-white rounded-md hover:scale-105 duration-100 items-center shadow-2xl py-5 px-2 flex flex-col gap-2"
+        >
+            <div
+                    class="flex items-center justify-center bg-fuchsia-500 rounded-full w-20 h-20"
+            >
+                <i class="text-white text-5xl fa-solid fa-house-laptop"></i>
+            </div>
+            <h2 class="text-xl md:text-2xl font-bold">Multiple devices</h2>
+            <p>Safely synchronize across devices with Bank standard security.</p>
+        </div>
+
+        <div
+                class="bg-white rounded-md hover:scale-105 duration-100 items-center shadow-2xl py-5 px-2 flex flex-col gap-2"
+        >
+            <div
+                    class="flex items-center justify-center bg-fuchsia-500 rounded-full w-20 h-20"
+            >
+                <i class="text-white text-5xl fa-solid fa-money-bill-transfer"></i>
+            </div>
+            <h2 class="text-xl md:text-2xl font-bold">Recurring transaction</h2>
+            <p>
+                Get notified of recurring bills and transactions before due date.
+            </p>
+        </div>
+
+        <div
+                class="bg-white rounded-md hover:scale-105 duration-100 items-center shadow-2xl py-5 px-2 flex flex-col gap-2"
+        >
+            <div
+                    class="flex items-center justify-center bg-fuchsia-500 rounded-full w-20 h-20"
+            >
+                <i class="text-white text-5xl fa-solid fa-route"></i>
+            </div>
+            <h2 class="text-xl md:text-2xl font-bold">Travel mode</h2>
+            <p>All currencies supported with up-to-date exchange rate.</p>
+        </div>
+
+        <div
+                class="bg-white rounded-md hover:scale-105 duration-100 items-center shadow-2xl py-5 px-2 flex flex-col gap-2"
+        >
+            <div
+                    class="flex items-center justify-center bg-fuchsia-500 rounded-full w-20 h-20"
+            >
+                <i class="text-white text-5xl fa-solid fas fa-piggy-bank"></i>
+            </div>
+            <h2 class="text-xl md:text-2xl font-bold">Saving plan</h2>
+            <p>Keep track on savings process to meet your financial goals.</p>
+        </div>
+
+        <div
+                class="bg-white rounded-md hover:scale-105 duration-100 items-center shadow-2xl py-5 px-2 flex flex-col gap-2"
+        >
+            <div
+                    class="flex items-center justify-center bg-fuchsia-500 rounded-full w-20 h-20"
+            >
+                <i
+                        class="text-white text-5xl fa-solid fas fas fa-file-invoice-dollar"
+                ></i>
+            </div>
+            <h2 class="text-xl md:text-2xl font-bold">Debt and loan</h2>
+            <p>Manage your debts, loans and payment process in one place.</p>
+        </div>
+
+        <div
+                class="bg-white rounded-md hover:scale-105 duration-100 items-center shadow-2xl py-5 px-2 flex flex-col gap-2"
+        >
+            <div
+                    class="flex items-center justify-center bg-fuchsia-500 rounded-full w-20 h-20"
+            >
+                <i class="text-white text-5xl fa-solid fas fas fa-qrcode"></i>
+            </div>
+            <h2 class="text-xl md:text-2xl font-bold">Scan receipt</h2>
+            <p>
+                Take pictures of your receipts to auto-process and organize them.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Review Section -->
+<section class="md:px-10 px-7 text-center">
+    <h2 class="md:text-5xl text-4xl font-bold pt-20 pb-5">
+        See our users feedback
+    </h2>
+    <div class="flex justify-center gap-5">
+        <div class="flex">
+            <div class="">
+                <i class="fa-solid fa-star" style="color: #ffff00"></i>
+                <i class="fa-solid fa-star" style="color: #ffff00"></i>
+                <i class="fa-solid fa-star" style="color: #ffff00"></i>
+                <i class="fa-solid fa-star" style="color: #ffff00"></i>
+                <i class="fa-solid fa-star-half-stroke" style="color: #ffff00"></i>
+            </div>
+            <p class="pl-1 font-bold">4.9</p>
+        </div>
+        <p>based on user reviews</p>
+    </div>
+    <div class="gap-7 grid md:grid-cols-3 grid-cols-1 mt-16">
+        <div
+                class="hover:bg-fuchsia-500 rounded-md duration-100 hover:text-white border-2 border-fuchsia-200"
+        >
+            <p class="p-5">
+                Perfect app. My husband and I use it to track all our expenses and
+                income. We generate our household accounts and budget using this fab
+                app. Furthermore, the developers are hands-on and extremely helpful.
+                Do not look any further. Get this app now!.
+            </p>
+            <p class="font-bold my-5">Carl Kent</p>
+        </div>
+
+        <div
+                class="hover:bg-fuchsia-500 rounded-md duration-100 hover:text-white border-2 border-fuchsia-200"
+        >
+            <p class="p-5">
+                Perfect app. My husband and I use it to track all our expenses and
+                income. We generate our household accounts and budget using this fab
+                app. Furthermore, the developers are hands-on and extremely helpful.
+                Do not look any further. Get this app now!.
+            </p>
+            <p class="font-bold my-5">Carl Kent</p>
+        </div>
+
+        <div
+                class="hover:bg-fuchsia-500 rounded-md duration-100 hover:text-white border-2 border-fuchsia-200"
+        >
+            <p class="p-5">
+                Perfect app. My husband and I use it to track all our expenses and
+                income. We generate our household accounts and budget using this fab
+                app. Furthermore, the developers are hands-on and extremely helpful.
+                Do not look any further. Get this app now!.
+            </p>
+            <p class="font-bold my-5">Carl Kent</p>
+        </div>
+    </div>
+    <button
+            class="my-10 theme-border border-4 md:px-10 md:py-3 px-6 py-2 rounded hover:text-white theme-btn duration-100"
+    >
+        See More
+    </button>
+</section>
+
+<!-- Banner -->
+<section class="w-screen h-screen flex justify-center items-center">
+    <div class="px-2 relative rounded-2xl text-white w-5/6 bg-fuchsia-500">
+        <div class="py-28 md:pl-28">
+            <h2
+                    class="mb-6 md:text-left text-center md:text-4xl text-3xl font-bold"
+            >
+                Take your finances to the next levels!
+            </h2>
+            <p class="mb-8 md:text-left text-center">
+                Don't hesitate, money matters.
+            </p>
+            <div class="flex gap-5 md:justify-start justify-center">
+                <a href="#"
+                ><img
+                        src="https://moneylover.me/img/marketplace/appstore.svg"
+                        alt=""
+                /></a>
+                <a href="#"
+                ><img
+                        src="https://moneylover.me/img/marketplace/google-play.svg"
+                        alt=""
+                /></a>
+            </div>
+        </div>
+        <img
+                class="w-56 md:block hidden absolute bottom-0 right-28"
+                src="https://moneylover.me/img/MOCKUP@4x.png"
+                alt=""
+        />
+    </div>
+</section>
+
+<!-- Footer -->
+<footer
+        class="px-10 items-center justify-around py-5 flex bg-pink-950 text-white"
+>
+    <p class="text-base">© 2023 Phoenix Finance. All rights reserved.</p>
+    <div class="flex gap-3">
+        <div
+                class="flex justify-center items-center border border-white rounded-full h-7 w-7"
+        >
+            <a href="#"> <i class="fa-brands fa-facebook-f"></i></a>
+        </div>
+        <div
+                class="flex justify-center items-center border border-white rounded-full h-7 w-7"
+        >
+            <a href="#"> <i class="fa-brands fa-twitter"></i></a>
+        </div>
+        <div
+                class="flex justify-center items-center border border-white rounded-full h-7 w-7"
+        >
+            <a href="#"> <i class="fa-brands fa-instagram"></i></a>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
-

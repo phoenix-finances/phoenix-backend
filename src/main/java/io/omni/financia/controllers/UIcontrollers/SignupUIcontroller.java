@@ -39,7 +39,7 @@ public class SignupUIcontroller {
         } else {
             user.setPassword((passwordEncoder.encode(user.getPassword())));
             appUserService.insert(user);
-            return "/home";
+            return "redirect:/";
         }
         return "signup";
     }
