@@ -74,7 +74,9 @@ jobs:
               -e PHOENIX_DB_USR=$PHOENIX_DB_USR \
               -e PHOENIX_DB_PWD=$PHOENIX_DB_PWD \
               -p 8088:8080 \
-              $REPO_ROOT/$REPO_NAME:$TAG"
+              $REPO_ROOT/$REPO_NAME:$TAG;
+            docker image prune -y;
+            docker container prune -y"
 
       - name: Log out of Amazon ECR
         if: always()
