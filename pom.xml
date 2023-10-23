@@ -20,7 +20,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>2.7.0</version><!--$NO-MVN-MAN-VER$-->
+            <version>3.1.5</version><!--$NO-MVN-MAN-VER$-->
         </dependency>
         <!--suppress VulnerableLibrariesLocal -->
         <dependency>
